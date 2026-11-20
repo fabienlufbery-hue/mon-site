@@ -3,20 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services — ASYT</title>
-<meta name="description" content="Conseil, déploiement d'IA on-premise, audit de sécurité, formation. Découvrez les services d'ASYT Associates pour les organisations sensibles.">
+<title>Fonctionnalités — ASYT, intelligence artificielle locale</title>
+<meta name="description" content="Découvrez les fonctionnalités d'ASYT : IA conversationnelle locale, recherche dans vos documents (RAG), mémoire locale, automatisation et modèles personnalisables.">
+<meta name="theme-color" content="#FDF7F0">
+<link rel="canonical" href="https://fabienlufbery-hue.github.io/mon-site/services.html">
+<link rel="alternate" hreflang="fr" href="https://fabienlufbery-hue.github.io/mon-site/services.html">
+<link rel="alternate" hreflang="en" href="https://fabienlufbery-hue.github.io/mon-site/services-en.html">
+<link rel="alternate" hreflang="x-default" href="https://fabienlufbery-hue.github.io/mon-site/services.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="asyt-logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ASYT Associates — L'IA souveraine pour vos données sensibles">
-<meta property="og:description" content="ASYT Associates conçoit des intelligences artificielles sécurisées et 100% locales pour les organisations qui manipulent des données sensibles.">
-<meta property="og:image" content="asyt-logo.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="asyt-logo.png">
+<meta property="og:site_name" content="ASYT">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://fabienlufbery-hue.github.io/mon-site/services.html">
+<meta property="og:title" content="Fonctionnalités — ASYT, intelligence artificielle locale">
+<meta property="og:description" content="Découvrez les fonctionnalités d'ASYT : IA conversationnelle locale, recherche dans vos documents (RAG), mémoire locale, automatisation et modèles personnalisables.">
+<meta property="og:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<meta property="og:image:alt" content="ASYT Associates">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fonctionnalités — ASYT, intelligence artificielle locale">
+<meta name="twitter:description" content="Découvrez les fonctionnalités d'ASYT : IA conversationnelle locale, recherche dans vos documents (RAG), mémoire locale, automatisation et modèles personnalisables.">
+<meta name="twitter:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<noscript><style>.preloader{display:none!important}.reveal,.rise,.h1-step,.hero-mark{opacity:1!important;transform:none!important;animation:none!important}.accordion-panel{grid-template-rows:1fr!important}.accordion-panel .accordion-inner{visibility:visible!important}</style></noscript>
 </head>
-<body>
+<body id="top">
 <canvas id="data-canvas" aria-hidden="true"></canvas>
 <!-- Preloader -->
 <div class="preloader" id="preloader" aria-hidden="true">
@@ -52,35 +65,43 @@
   <div class="preloader-progress"></div>
 </div>
 
-
-
 <script>
 (function() {
+  var root = document.documentElement;
   var preloader = document.getElementById('preloader');
   if (!preloader) return;
-  
-  // Détecter si c'est la première visite ou une navigation interne
-  var isFirstVisit = !sessionStorage.getItem('asyt-visited');
-  var totalDuration = isFirstVisit ? 3800 : 1100;
-  
-  // Marquer comme visité
-  sessionStorage.setItem('asyt-visited', '1');
-  
-  // Appliquer une animation accélérée si ce n'est pas la première visite
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Première visite (animation complète) ou navigation interne (version accélérée)
+  var isFirstVisit = true;
+  try {
+    isFirstVisit = !sessionStorage.getItem('asyt-visited');
+    sessionStorage.setItem('asyt-visited', '1');
+  } catch (e) {}
+  var totalDuration = reduce ? 300 : (isFirstVisit ? 3800 : 1100);
+
   if (!isFirstVisit) {
     preloader.classList.add('preloader-fast');
   }
-  
+
+  // Les animations d'entrée de la page attendent la fin du préchargeur
+  root.classList.add('is-preloading');
+
+  var done = false;
   function hidePreloader() {
+    if (done) return;
+    done = true;
+    root.classList.remove('is-preloading');
     preloader.classList.add('is-hidden');
-    setTimeout(function() { 
-      if (preloader.parentNode) preloader.remove(); 
+    setTimeout(function() {
+      if (preloader.parentNode) preloader.remove();
     }, 800);
     document.body.style.overflow = '';
   }
-  
+
   document.body.style.overflow = 'hidden';
-  
+
   if (document.readyState === 'complete') {
     setTimeout(hidePreloader, totalDuration);
   } else {
@@ -93,168 +114,161 @@
 })();
 </script>
 
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo">
+    <a href="index.html" class="logo" aria-label="ASYT — Accueil">
       <span class="mark"></span>ASYT
     </a>
-    <nav class="nav" id="primary-nav">
+    <nav class="nav" id="primary-nav" aria-label="Navigation">
       <a href="index.html">Accueil</a>
+      <a href="services.html" class="active" aria-current="page">Fonctionnalités</a>
       <a href="a-propos.html">À propos</a>
-      <a href="services.html" class="active">Services</a>
       <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
       <div class="lang-switch">
-        <a href="services.html" class="lang active">FR</a>
-        <span class="lang-sep">/</span>
-        <a href="services-en.html" class="lang">EN</a>
+        <a href="services.html" class="lang active" hreflang="fr" lang="fr" aria-label="Français" aria-current="true">FR</a>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a href="services-en.html" class="lang" hreflang="en" lang="en" aria-label="English">EN</a>
       </div>
     </nav>
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
+    <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu" tabindex="-1">
 
   <!-- HERO -->
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow rise rise-1">Services</span>
-      <h1 class="rise rise-2">Cinq expertises, un même fil rouge : la <span class="highlight">souveraineté</span> de vos données.</h1>
-      <p class="lead rise rise-3">Du cadrage à la mise en production, formation incluse. Nous couvrons l'ensemble du cycle IA sans jamais quitter votre périmètre.</p>
+      <span class="eyebrow rise rise-1">Fonctionnalités</span>
+      <h1 class="rise rise-2">Découvrez les <span class="highlight">possibilités</span> d'ASYT.</h1>
+      <p class="lead rise rise-3">Une plateforme locale pour dialoguer avec l'IA, explorer vos documents, retrouver des connaissances et développer de nouveaux workflows.</p>
+      <p class="fineprint rise rise-4">ASYT est un logiciel en développement&nbsp;: la disponibilité et la maturité des fonctionnalités peuvent varier selon les versions.</p>
     </div>
   </section>
 
-  <!-- SERVICES DÉTAILLÉS -->
+  <!-- FONCTIONNALITÉS -->
   <section>
     <div class="container">
 
-      <article class="service-detailed reveal" id="strategie">
+      <article class="service-detailed reveal" id="conversation">
         <div>
-          <span class="label">01 / Conseil</span>
-          <h3>Stratégie & Cadrage IA</h3>
+          <span class="label">01 / Conversation</span>
+          <h2 class="block-title">IA conversationnelle locale</h2>
         </div>
         <div>
-          <p class="lead">Avant de déployer quoi que ce soit, nous prenons le temps de comprendre votre contexte. Avec vous, nous identifions les cas d'usage qui valent vraiment la peine, et ceux à éviter.</p>
-          <button class="accordion-trigger" aria-expanded="true" aria-controls="service-strategie">
+          <p class="lead">Échangez avec des modèles de langage compatibles exécutés sur votre infrastructure.</p>
+          <button class="accordion-trigger" type="button" aria-expanded="true" aria-controls="feature-1">
             <span>Voir le détail</span>
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
-          <div class="accordion-panel is-open" id="service-strategie">
+          <div class="accordion-panel is-open" id="feature-1">
             <div class="accordion-inner">
               <ul>
-                <li>Exploration des cas d'usage où l'IA peut vous apporter une valeur concrète</li>
-                <li>Cartographie des données sensibles et de leurs flux</li>
-                <li>Identification des risques : confidentialité, conformité, propriété intellectuelle</li>
-                <li>Recommandations technologiques et architecturales</li>
-                <li>Feuille de route de déploiement priorisée</li>
-                <li>Restitution claire en langage non technique, pour vous et votre direction</li>
+                <li>Modèles de langage compatibles, exécutés sur votre propre infrastructure.</li>
+                <li>Les performances dépendent du modèle choisi et du matériel disponible.</li>
+                <li>Le téléchargement initial des modèles peut nécessiter une connexion Internet.</li>
+                <li>Les fonctions locales sont conçues pour fonctionner sans connexion après installation des composants nécessaires.</li>
               </ul>
             </div>
           </div>
         </div>
       </article>
 
-      <article class="service-detailed reveal" id="on-premise">
+      <article class="service-detailed reveal" id="rag">
         <div>
-          <span class="label">02 / Build</span>
-          <h3>IA Privée & On-Premise</h3>
+          <span class="label">02 / Documents</span>
+          <h2 class="block-title">Documents et recherche RAG</h2>
         </div>
         <div>
-          <p class="lead">Nous installons votre IA directement sur votre infrastructure : serveurs internes ou poste local. Vos données ne quittent jamais votre périmètre.</p>
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="service-on-premise">
+          <p class="lead">Retrouvez les passages utiles de vos documents pour enrichir les réponses de l'IA.</p>
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="feature-2">
             <span>Voir le détail</span>
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
-          <div class="accordion-panel" id="service-on-premise">
+          <div class="accordion-panel" id="feature-2">
             <div class="accordion-inner">
               <ul>
-                <li>Sélection et configuration d'un modèle open-source adapté à votre besoin (Mistral, Llama, Qwen…)</li>
-                <li>Déploiement sur votre infrastructure (serveurs internes, environnement air-gap, postes locaux)</li>
-                <li>Connexion avec vos outils existants selon votre configuration (GED, messagerie…)</li>
-                <li>Mise en place de RAG sur vos bases documentaires</li>
-                <li>Configuration et ajustements de votre IA selon vos retours d'usage</li>
-                <li>Démonstration sur vos propres documents et cas d'usage réels</li>
+                <li>Importez vos documents, puis interrogez-les en langage naturel.</li>
+                <li>Parcours&nbsp;: documents, indexation, recherche, réponse contextualisée.</li>
+                <li>Références documentaires affichées lorsque la version du logiciel permet de les fournir.</li>
+                <li>Les formats pris en charge et les performances dépendent de la version.</li>
               </ul>
             </div>
           </div>
         </div>
       </article>
 
-      <article class="service-detailed reveal" id="audit">
+      <article class="service-detailed reveal" id="memoire">
         <div>
-          <span class="label">03 / Audit</span>
-          <h3>Audit Sécurité & Conformité IA</h3>
+          <span class="label">03 / Mémoire</span>
+          <h2 class="block-title">Mémoire locale</h2>
         </div>
         <div>
-          <p class="lead">Vos équipes utilisent déjà des outils IA, souvent sans cadre clair. Nous faisons le point sur vos usages et vous aidons à les encadrer.</p>
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="service-audit">
+          <p class="lead">Développez la continuité des échanges grâce à une mémoire persistante indépendante du modèle. Fonction en validation.</p>
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="feature-3">
             <span>Voir le détail</span>
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
-          <div class="accordion-panel" id="service-audit">
+          <div class="accordion-panel" id="feature-3">
             <div class="accordion-inner">
               <ul>
-                <li>Cartographie des usages IA en place (officiels et non déclarés)</li>
-                <li>Identification des principaux risques d'usage liés aux outils IA actuellement utilisés</li>
-                <li>Sensibilisation aux enjeux RGPD et AI Act</li>
-                <li>Politique d'usage et charte interne adaptées à votre organisation</li>
-                <li>Restitution exécutive et plan d'action priorisé</li>
-                <li>Points d'avancement et recommandations synthétiques pour votre direction</li>
+                <li>Mémoire locale indépendante du modèle de langage.</li>
+                <li>Objectif&nbsp;: conserver et retrouver des informations utiles entre plusieurs conversations.</li>
+                <li>Fonction en validation&nbsp;: l'enregistrement, la restitution et la suppression d'informations doivent être contrôlés avant tout usage sensible.</li>
+                <li>Organisation des connaissances&nbsp;: le graphe de connaissances et la visualisation 2D/3D sont des capacités en développement.</li>
               </ul>
             </div>
           </div>
         </div>
       </article>
 
-      <article class="service-detailed reveal" id="formation">
+      <article class="service-detailed reveal" id="automatisation">
         <div>
-          <span class="label">04 / Transmission</span>
-          <h3>Formation & Acculturation</h3>
+          <span class="label">04 / Automatisation</span>
+          <h2 class="block-title">Automatisation intelligente</h2>
         </div>
         <div>
-          <p class="lead">Un bon déploiement ne suffit pas si vos équipes ne savent pas quoi en faire. Nous formons dirigeants, métiers et équipes techniques à tirer vraiment parti de leur IA.</p>
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="service-formation">
+          <p class="lead">Explorez la planification et l'exécution contrôlée de tâches avec le module HERMES, en développement.</p>
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="feature-4">
             <span>Voir le détail</span>
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
-          <div class="accordion-panel" id="service-formation">
+          <div class="accordion-panel" id="feature-4">
             <div class="accordion-inner">
               <ul>
-                <li>Sessions de sensibilisation pour la direction : enjeux, potentiel et limites de l'IA</li>
-                <li>Formations opérationnelles adaptées à votre solution et à vos métiers</li>
-                <li>Ateliers pratiques de prompt engineering en contexte sécurisé</li>
-                <li>Documentation interne et supports pédagogiques sur mesure</li>
-                <li>Identification et accompagnement de référents IA dans vos équipes</li>
-                <li>Suivi post-formation pour répondre aux questions de vos équipes au fil de l'usage</li>
+                <li>Planification et exécution de certaines tâches avec des outils et des modèles locaux.</li>
+                <li>Conçu pour fonctionner sous le contrôle de l'utilisateur, avec des contrôles et autorisations adaptés.</li>
+                <li>La disponibilité et les permissions dépendent de la version et de la configuration.</li>
+                <li>Toutes les tâches informatiques ne peuvent pas être automatisées.</li>
               </ul>
             </div>
           </div>
         </div>
       </article>
 
-      <article class="service-detailed reveal" id="gouvernance">
+      <article class="service-detailed reveal" id="modeles">
         <div>
-          <span class="label">05 / Long terme</span>
-          <h3>Gouvernance & Support</h3>
+          <span class="label">05 / Modèles</span>
+          <h2 class="block-title">Modèles et personnalisation</h2>
         </div>
         <div>
-          <p class="lead">L'IA évolue vite. Après le déploiement, nous restons disponibles pour maintenir votre système, l'ajuster et vous tenir informés de ce qui compte vraiment.</p>
-          <button class="accordion-trigger" aria-expanded="false" aria-controls="service-gouvernance">
+          <p class="lead">Adaptez les modèles et les paramètres de votre environnement aux ressources disponibles.</p>
+          <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="feature-5">
             <span>Voir le détail</span>
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
-          <div class="accordion-panel" id="service-gouvernance">
+          <div class="accordion-panel" id="feature-5">
             <div class="accordion-inner">
               <ul>
-                <li>Accompagnement à la définition d'une gouvernance IA adaptée à votre taille</li>
-                <li>Veille technologique et réglementaire ciblée</li>
-                <li>Maintenance et mise à jour des modèles déployés</li>
-                <li>Points réguliers de suivi de votre déploiement</li>
-                <li>Support technique réactif</li>
-                <li>Documentation technique tenue à jour au fil des évolutions de votre système</li>
+                <li>Choisissez des modèles compatibles avec votre matériel.</li>
+                <li>Ajustez les paramètres selon les ressources disponibles.</li>
+                <li>Un GPU compatible peut améliorer les performances.</li>
+                <li>Tous les modèles ne fonctionnent pas sur tous les ordinateurs&nbsp;: les configurations s'évaluent au cas par cas.</li>
               </ul>
             </div>
           </div>
@@ -264,57 +278,19 @@
     </div>
   </section>
 
-  <!-- PROCESSUS -->
+  <!-- ACCOMPAGNEMENT -->
   <section>
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Notre méthode</span>
-        <h2>Comment nous <span class="highlight">travaillons.</span></h2>
-        <p class="lead">Cinq étapes pour limiter les risques et vous laisser maître de chaque décision.</p>
-      </div>
-      <div class="process">
-        <div class="process-step reveal">
-          <span class="step-num">ÉTAPE · 01</span>
-          <h3>Écoute</h3>
-          <p>Nous commençons par comprendre votre métier et vos contraintes. Pas de solution avant le diagnostic.</p>
+      <div class="band reveal">
+        <div class="section-head" style="margin-bottom: 0;">
+          <span class="eyebrow" style="color: var(--ink-soft);">Déploiement local</span>
+          <h2 class="chapter-title">Accompagnement</h2>
+          <p class="lead">Besoin d'évaluer la faisabilité d'un déploiement local&nbsp;? Échangeons sur vos contraintes matérielles, vos données et vos objectifs.</p>
+          <div class="hero-actions" style="margin-top: 0.4rem;">
+            <a href="contact.html#formulaire" class="btn btn-primary">Nous contacter <span class="arrow" aria-hidden="true">→</span></a>
+            <a href="contact.html?sujet=demonstration#formulaire" class="btn btn-ghost">Demander une démonstration</a>
+          </div>
         </div>
-        <div class="process-step reveal">
-          <span class="step-num">ÉTAPE · 02</span>
-          <h3>Cadrage</h3>
-          <p>Périmètre, cas d'usage, architecture, indicateurs de succès : tout est formalisé dans un document partagé.</p>
-        </div>
-        <div class="process-step reveal">
-          <span class="step-num">ÉTAPE · 03</span>
-          <h3>Prototype</h3>
-          <p>Un premier livrable utilisable en quelques semaines, sur un périmètre ciblé. L'objectif : valider sur le terrain avant d'industrialiser.</p>
-        </div>
-        <div class="process-step reveal">
-          <span class="step-num">ÉTAPE · 04</span>
-          <h3>Déploiement</h3>
-          <p>Mise en production sur votre infrastructure, intégration aux outils existants, tests de sécurité, recette utilisateur, formation des premiers usagers.</p>
-        </div>
-        <div class="process-step reveal">
-          <span class="step-num">ÉTAPE · 05</span>
-          <h3>Transmission</h3>
-          <p>Documentation, formation de vos équipes, plan de gouvernance. Vous devenez autonomes. Nous restons disponibles.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section>
-    <div class="container">
-      <div class="cta-block reveal">
-        <div>
-          <span class="eyebrow">Premier échange gratuit</span>
-          <h2 style="margin-top: 1rem;">Un cas d'usage en tête ? Parlons-en.</h2>
-          <p style="margin-top: 1.2rem; max-width: 50ch;">Gratuit, sans engagement. Nous évaluons votre cas avant toute proposition.</p>
-        </div>
-        <a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener" class="btn btn-primary">
-          Réserver mon créneau gratuit
-          <span class="arrow">→</span>
-        </a>
       </div>
     </div>
   </section>
@@ -328,29 +304,30 @@
         <div class="logo">
           <span class="mark"></span>ASYT
         </div>
-        <p>IA souveraine pour les environnements où la confidentialité est non négociable.</p>
+        <p>Logiciel d'intelligence artificielle locale pour vos documents et vos connaissances.</p>
       </div>
       <div class="footer-col">
-        <h5>Navigation</h5>
+        <p class="footer-col-title">Navigation</p>
         <ul>
           <li><a href="index.html">Accueil</a></li>
+          <li><a href="services.html">Fonctionnalités</a></li>
           <li><a href="a-propos.html">À propos</a></li>
-          <li><a href="services.html">Services</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <p class="footer-col-title">Contact</p>
         <ul>
           <li><a href="mailto:asyt.associates@outlook.com">asyt.associates@outlook.com</a></li>
           <li><a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener">Prendre rendez-vous</a></li>
         </ul>
       </div>
     </div>
+    <p class="footer-note">ASYT est un logiciel en développement&nbsp;: la disponibilité et la maturité des fonctionnalités varient selon les versions. Ce site utilise des services externes (formulaire Formspree, prise de rendez-vous Calendly, polices Google Fonts), distincts du fonctionnement local du logiciel.</p>
     <div class="footer-bottom">
       <span>© 2026 ASYT Associates. Tous droits réservés.</span>
-      <span>Paris · Conçu pour durer.</span>
+      <a href="#top">Haut de page</a>
     </div>
   </div>
 </footer>

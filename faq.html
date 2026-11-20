@@ -3,20 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAQ — ASYT</title>
-<meta name="description" content="Questions fréquentes sur le déploiement d'IA privée et souveraine : tarifs, délais, infrastructure, conformité. Les réponses honnêtes d'ASYT.">
+<title>FAQ — ASYT, intelligence artificielle locale</title>
+<meta name="description" content="Réponses aux questions fréquentes sur ASYT : fonctionnement hors ligne, documents, mémoire, automatisation, matériel, conformité et état de développement.">
+<meta name="theme-color" content="#FDF7F0">
+<link rel="canonical" href="https://fabienlufbery-hue.github.io/mon-site/faq.html">
+<link rel="alternate" hreflang="fr" href="https://fabienlufbery-hue.github.io/mon-site/faq.html">
+<link rel="alternate" hreflang="en" href="https://fabienlufbery-hue.github.io/mon-site/faq-en.html">
+<link rel="alternate" hreflang="x-default" href="https://fabienlufbery-hue.github.io/mon-site/faq.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="asyt-logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ASYT — Questions fréquentes sur l'IA souveraine">
-<meta property="og:description" content="Questions fréquentes sur le déploiement d'IA privée et souveraine : tarifs, délais, infrastructure, conformité. Les réponses honnêtes d'ASYT.">
-<meta property="og:image" content="asyt-logo.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="asyt-logo.png">
+<meta property="og:site_name" content="ASYT">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://fabienlufbery-hue.github.io/mon-site/faq.html">
+<meta property="og:title" content="FAQ — ASYT, intelligence artificielle locale">
+<meta property="og:description" content="Réponses aux questions fréquentes sur ASYT : fonctionnement hors ligne, documents, mémoire, automatisation, matériel, conformité et état de développement.">
+<meta property="og:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<meta property="og:image:alt" content="ASYT Associates">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FAQ — ASYT, intelligence artificielle locale">
+<meta name="twitter:description" content="Réponses aux questions fréquentes sur ASYT : fonctionnement hors ligne, documents, mémoire, automatisation, matériel, conformité et état de développement.">
+<meta name="twitter:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<noscript><style>.preloader{display:none!important}.reveal,.rise,.h1-step,.hero-mark{opacity:1!important;transform:none!important;animation:none!important}.accordion-panel{grid-template-rows:1fr!important}.accordion-panel .accordion-inner{visibility:visible!important}</style></noscript>
 </head>
-<body>
+<body id="top">
 <canvas id="data-canvas" aria-hidden="true"></canvas>
 <!-- Preloader -->
 <div class="preloader" id="preloader" aria-hidden="true">
@@ -52,26 +65,34 @@
   <div class="preloader-progress"></div>
 </div>
 
-
-
 <script>
 (function() {
+  var root = document.documentElement;
   var preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  // Détecter si c'est la première visite ou une navigation interne
-  var isFirstVisit = !sessionStorage.getItem('asyt-visited');
-  var totalDuration = isFirstVisit ? 3800 : 1100;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Marquer comme visité
-  sessionStorage.setItem('asyt-visited', '1');
+  // Première visite (animation complète) ou navigation interne (version accélérée)
+  var isFirstVisit = true;
+  try {
+    isFirstVisit = !sessionStorage.getItem('asyt-visited');
+    sessionStorage.setItem('asyt-visited', '1');
+  } catch (e) {}
+  var totalDuration = reduce ? 300 : (isFirstVisit ? 3800 : 1100);
 
-  // Appliquer une animation accélérée si ce n'est pas la première visite
   if (!isFirstVisit) {
     preloader.classList.add('preloader-fast');
   }
 
+  // Les animations d'entrée de la page attendent la fin du préchargeur
+  root.classList.add('is-preloading');
+
+  var done = false;
   function hidePreloader() {
+    if (done) return;
+    done = true;
+    root.classList.remove('is-preloading');
     preloader.classList.add('is-hidden');
     setTimeout(function() {
       if (preloader.parentNode) preloader.remove();
@@ -93,37 +114,39 @@
 })();
 </script>
 
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo">
+    <a href="index.html" class="logo" aria-label="ASYT — Accueil">
       <span class="mark"></span>ASYT
     </a>
-    <nav class="nav" id="primary-nav">
+    <nav class="nav" id="primary-nav" aria-label="Navigation">
       <a href="index.html">Accueil</a>
+      <a href="services.html">Fonctionnalités</a>
       <a href="a-propos.html">À propos</a>
-      <a href="services.html">Services</a>
-      <a href="faq.html" class="active">FAQ</a>
+      <a href="faq.html" class="active" aria-current="page">FAQ</a>
       <a href="contact.html">Contact</a>
       <div class="lang-switch">
-        <a href="faq.html" class="lang active">FR</a>
-        <span class="lang-sep">/</span>
-        <a href="faq-en.html" class="lang">EN</a>
+        <a href="faq.html" class="lang active" hreflang="fr" lang="fr" aria-label="Français" aria-current="true">FR</a>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a href="faq-en.html" class="lang" hreflang="en" lang="en" aria-label="English">EN</a>
       </div>
     </nav>
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
+    <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu" tabindex="-1">
 
   <!-- HERO -->
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow rise rise-1">Questions fréquentes</span>
-      <h1 class="rise rise-2">Vos questions sur l'IA privée. Les vraies <span class="highlight">réponses.</span></h1>
-      <p class="lead rise rise-3">Tarifs, délais, infrastructure, conformité : tout ce que vous vous demandez avant de vous lancer.</p>
+      <h1 class="rise rise-2">Vos questions sur ASYT. Des réponses <span class="highlight">claires.</span></h1>
+      <p class="lead rise rise-3">Fonctionnement local, documents, mémoire, automatisation, conformité&nbsp;: l'essentiel, sans promesse excessive.</p>
     </div>
   </section>
 
@@ -133,85 +156,169 @@
       <div class="faq-list reveal">
 
         <div class="accordion-item">
-          <button class="accordion-trigger accordion-trigger--faq" aria-expanded="false" aria-controls="faq-01">
-            <span>Comment garantissez-vous que nos données ne quittent jamais notre environnement ?</span>
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-01">
+              <span>ASYT fonctionne-t-il sans Internet&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
           <div class="accordion-panel" id="faq-01">
             <div class="accordion-inner">
-              <p>C'est notre architecture par défaut, pas une option : tout se déploie sur votre infrastructure : vos serveurs, votre réseau, votre environnement maîtrisé. Aucun appel vers des API externes, aucun transit vers un cloud tiers. Pour les environnements les plus contraints (santé, défense, juridique), nous déployons en mode air-gap : l'IA fonctionne sans connexion internet. Vos données ne bougent pas : les modèles viennent à elles.</p>
+              <p>Les fonctions locales d'ASYT sont conçues pour fonctionner sans connexion après installation des composants nécessaires. Certaines opérations, comme le téléchargement initial de modèles ou la récupération de nouvelles pages Web, peuvent nécessiter Internet.</p>
             </div>
           </div>
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger accordion-trigger--faq" aria-expanded="false" aria-controls="faq-02">
-            <span>Nos équipes utilisent déjà ChatGPT ou des outils IA en interne. Comment savoir si on est exposé ?</span>
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-02">
+              <span>Mes documents restent-ils sur mon ordinateur&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
           <div class="accordion-panel" id="faq-02">
             <div class="accordion-inner">
-              <p>C'est précisément ce que révèle notre audit sécurité. Nous cartographions l'ensemble de vos usages IA, y compris le shadow IT, et testons vos outils en conditions réelles : prompt injection, fuite de données, conformité RGPD et AI Act. Bonne nouvelle : cet audit est offert si vous souscrivez ensuite à la solution complète. Premier échange gratuit pour évaluer si c'est votre cas.</p>
+              <p>En configuration entièrement locale, le traitement des documents et l'inférence peuvent s'effectuer sur l'infrastructure de l'utilisateur. Le comportement exact dépend de la configuration et des intégrations activées.</p>
             </div>
           </div>
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger accordion-trigger--faq" aria-expanded="false" aria-controls="faq-03">
-            <span>C'est combien, concrètement ?</span>
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-03">
+              <span>Quelle est la différence entre ASYT et un chatbot en ligne&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
           <div class="accordion-panel" id="faq-03">
             <div class="accordion-inner">
-              <p>Une mission complète (audit du besoin inclus + configuration de votre IA privée) démarre à <strong>5 000 €</strong> par serveur. Si vous n'avez pas l'infrastructure nécessaire, nous achetons et installons le serveur dédié : la mission reste dans une fourchette de <strong>5 000 à 10 000 €</strong> tout compris. La maintenance annuelle est ensuite de <strong>500 €/an</strong>. Pour un projet qui supprime toute dépendance aux API propriétaires et élimine le risque de fuite de données, le ROI est souvent très rapide. Réservez un créneau : on chiffre votre cas en une heure.</p>
+              <p>ASYT privilégie l'exécution locale et intègre des fonctions de recherche documentaire, de mémoire et d'automatisation. Les performances dépendent notamment du modèle choisi et du matériel disponible.</p>
             </div>
           </div>
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger accordion-trigger--faq" aria-expanded="false" aria-controls="faq-04">
-            <span>On est une PME. Est-ce vraiment accessible pour nous ?</span>
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-04">
+              <span>Faut-il un ordinateur puissant&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
           <div class="accordion-panel" id="faq-04">
             <div class="accordion-inner">
-              <p>Oui. Un investissement ponctuel entre 5 000 et 10 000 €, puis 500 €/an de maintenance : c'est un budget maîtrisé, pas un abonnement mensuel qui s'envole avec l'usage. Les modèles open-source déployés vous appartiennent entièrement : pas de frais d'API récurrents, pas de dépendance à un fournisseur. Pour une PME qui traite des données sensibles, la vraie question n'est souvent pas "peut-on se l'offrir" mais "peut-on se permettre de ne pas le faire".</p>
+              <p>Les besoins varient selon les modèles et les fonctionnalités utilisés. Un GPU compatible peut améliorer les performances, mais les configurations doivent être évaluées au cas par cas.</p>
             </div>
           </div>
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger accordion-trigger--faq" aria-expanded="false" aria-controls="faq-05">
-            <span>On n'a pas d'équipe IT dédiée. Est-ce qu'un déploiement IA privé est faisable pour nous ?</span>
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-05">
+              <span>ASYT peut-il analyser mes documents&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
           <div class="accordion-panel" id="faq-05">
             <div class="accordion-inner">
-              <p>Oui, c'est fait pour ça. Nous prenons en charge l'intégralité de la mission : audit, configuration, déploiement, formation de vos équipes. Aucune compétence technique interne requise de votre côté. À l'issue, vos équipes gouvernent leur IA en autonomie, sans rester dépendants de nous. Premier échange gratuit pour évaluer la faisabilité dans votre contexte.</p>
+              <p>ASYT intègre un système de recherche documentaire permettant d'exploiter des contenus importés. Les formats pris en charge et les performances dépendent de la version.</p>
             </div>
           </div>
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger accordion-trigger--faq" aria-expanded="false" aria-controls="faq-06">
-            <span>Doit-on obligatoirement acheter un nouveau serveur ?</span>
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-06">
+              <span>ASYT possède-t-il une mémoire&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
           <div class="accordion-panel" id="faq-06">
             <div class="accordion-inner">
-              <p>Pas forcément. Si votre infrastructure actuelle est compatible, nous déployons directement dessus : mission à partir de <strong>5 000 €</strong>, bouclée en <strong>2 semaines</strong>. Si l'achat d'un serveur dédié s'impose, nous gérons tout : achat, livraison, installation. La mission monte alors jusqu'à <strong>10 000 €</strong> et peut prendre jusqu'à <strong>2 mois</strong> selon la complexité logistique. On évalue ça ensemble dès le premier échange.</p>
+              <p>Un module de mémoire persistante locale est en développement et en validation. Son fonctionnement, notamment l'enregistrement, la restitution et la suppression d'informations, doit être contrôlé avant tout usage sensible.</p>
             </div>
           </div>
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger accordion-trigger--faq" aria-expanded="false" aria-controls="faq-07">
-            <span>Concrètement, comment ça démarre ? À quoi s'attendre ?</span>
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </button>
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-07">
+              <span>Peut-il effectuer des tâches automatiquement&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
           <div class="accordion-panel" id="faq-07">
             <div class="accordion-inner">
-              <p>Premier appel gratuit, sans engagement : on évalue votre besoin et votre infrastructure ensemble. Si on se lance, on démarre par l'audit du besoin, <strong>offert</strong> si vous souscrivez à la solution complète. Vient ensuite la configuration et le déploiement de votre IA privée : <strong>2 semaines</strong> si vous avez déjà le serveur, <strong>jusqu'à 2 mois</strong> si on part de zéro avec achat et installation du matériel. Vous validez à chaque étape.</p>
+              <p>ASYT développe des fonctions de planification et d'automatisation. Leur disponibilité et leurs permissions dépendent de la version et de la configuration.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-08">
+              <span>ASYT effectue-t-il des recherches sur Internet&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <div class="accordion-panel" id="faq-08">
+            <div class="accordion-inner">
+              <p>ASYT dispose d'un module de sources Web permettant de récupérer certaines pages et d'en consulter le contenu ultérieurement hors ligne. Cela ne signifie pas qu'un moteur de recherche Web autonome généraliste est disponible.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-09">
+              <span>ASYT est-il déjà prêt pour tous les usages professionnels&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <div class="accordion-panel" id="faq-09">
+            <div class="accordion-inner">
+              <p>ASYT est encore en développement et en validation. Certaines fonctionnalités nécessitent des tests complémentaires avant un déploiement dans des environnements critiques ou traitant des données sensibles.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-10">
+              <span>Quel est le prix d'ASYT&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <div class="accordion-panel" id="faq-10">
+            <div class="accordion-inner">
+              <p>Les conditions d'accès et de déploiement sont à définir selon le besoin. Contactez-nous pour échanger sur votre projet.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-11">
+              <span>ASYT garantit-il la conformité RGPD ou HDS&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <div class="accordion-panel" id="faq-11">
+            <div class="accordion-inner">
+              <p>Non, l'exécution locale ne garantit pas à elle seule une conformité réglementaire. Celle-ci dépend de l'ensemble de l'environnement, des processus, de la configuration et des exigences applicables.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="faq-q">
+            <button class="accordion-trigger accordion-trigger--faq" type="button" aria-expanded="false" aria-controls="faq-12">
+              <span>Ce site utilise-t-il des services externes&nbsp;?</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <div class="accordion-panel" id="faq-12">
+            <div class="accordion-inner">
+              <p>Oui. Le formulaire de contact est traité par Formspree, la prise de rendez-vous passe par Calendly et les polices sont chargées depuis Google Fonts. Ces services sont distincts du fonctionnement local du logiciel ASYT.</p>
             </div>
           </div>
         </div>
@@ -225,16 +332,13 @@
     <div class="container">
       <div class="cta-block reveal">
         <div>
-          <span class="eyebrow">Vous ne trouvez pas votre réponse ?</span>
-          <h2 style="margin-top: 1rem;">Parlons directement.</h2>
-          <p style="margin-top: 1.2rem; max-width: 50ch;">En une heure, on clarifie votre cas : sans jargon et sans engagement.</p>
+          <span class="eyebrow">Une autre question&nbsp;?</span>
+          <h2 class="chapter-title" style="margin-top: 1rem;">Écrivez-nous.</h2>
+          <p style="margin-top: 1.2rem; max-width: 52ch;">Décrivez votre projet&nbsp;: nous pourrons répondre à vos questions sur ASYT et sur les possibilités du logiciel.</p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;">
-          <a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener" class="btn btn-primary">
-            Réserver un créneau gratuit
-            <span class="arrow">→</span>
-          </a>
-          <a href="contact.html" class="btn btn-ghost">Nous écrire</a>
+        <div class="cta-actions">
+          <a href="contact.html#formulaire" class="btn btn-primary">Nous contacter <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="contact.html?sujet=demonstration#formulaire" class="btn btn-ghost">Demander une démonstration</a>
         </div>
       </div>
     </div>
@@ -249,29 +353,30 @@
         <div class="logo">
           <span class="mark"></span>ASYT
         </div>
-        <p>IA souveraine pour les environnements où la confidentialité est non négociable.</p>
+        <p>Logiciel d'intelligence artificielle locale pour vos documents et vos connaissances.</p>
       </div>
       <div class="footer-col">
-        <h5>Navigation</h5>
+        <p class="footer-col-title">Navigation</p>
         <ul>
           <li><a href="index.html">Accueil</a></li>
+          <li><a href="services.html">Fonctionnalités</a></li>
           <li><a href="a-propos.html">À propos</a></li>
-          <li><a href="services.html">Services</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <p class="footer-col-title">Contact</p>
         <ul>
           <li><a href="mailto:asyt.associates@outlook.com">asyt.associates@outlook.com</a></li>
           <li><a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener">Prendre rendez-vous</a></li>
         </ul>
       </div>
     </div>
+    <p class="footer-note">ASYT est un logiciel en développement&nbsp;: la disponibilité et la maturité des fonctionnalités varient selon les versions. Ce site utilise des services externes (formulaire Formspree, prise de rendez-vous Calendly, polices Google Fonts), distincts du fonctionnement local du logiciel.</p>
     <div class="footer-bottom">
       <span>© 2026 ASYT Associates. Tous droits réservés.</span>
-      <span>Paris · Conçu pour durer.</span>
+      <a href="#top">Haut de page</a>
     </div>
   </div>
 </footer>

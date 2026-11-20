@@ -3,20 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>À propos — ASYT</title>
-<meta name="description" content="ASYT Associates est un cabinet de conseil et d'ingénierie spécialisé dans le déploiement d'intelligences artificielles sécurisées pour les organisations sensibles.">
+<title>À propos — ASYT, intelligence artificielle locale</title>
+<meta name="description" content="ASYT est né d'une conviction : l'IA doit aussi pouvoir fonctionner chez vous. Découvrez la vision et les valeurs derrière ce logiciel d'intelligence artificielle locale.">
+<meta name="theme-color" content="#FDF7F0">
+<link rel="canonical" href="https://fabienlufbery-hue.github.io/mon-site/a-propos.html">
+<link rel="alternate" hreflang="fr" href="https://fabienlufbery-hue.github.io/mon-site/a-propos.html">
+<link rel="alternate" hreflang="en" href="https://fabienlufbery-hue.github.io/mon-site/about.html">
+<link rel="alternate" hreflang="x-default" href="https://fabienlufbery-hue.github.io/mon-site/a-propos.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="asyt-logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ASYT Associates — L'IA souveraine pour vos données sensibles">
-<meta property="og:description" content="ASYT Associates conçoit des intelligences artificielles sécurisées et 100% locales pour les organisations qui manipulent des données sensibles.">
-<meta property="og:image" content="asyt-logo.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="asyt-logo.png">
+<meta property="og:site_name" content="ASYT">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://fabienlufbery-hue.github.io/mon-site/a-propos.html">
+<meta property="og:title" content="À propos — ASYT, intelligence artificielle locale">
+<meta property="og:description" content="ASYT est né d'une conviction : l'IA doit aussi pouvoir fonctionner chez vous. Découvrez la vision et les valeurs derrière ce logiciel d'intelligence artificielle locale.">
+<meta property="og:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<meta property="og:image:alt" content="ASYT Associates">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="À propos — ASYT, intelligence artificielle locale">
+<meta name="twitter:description" content="ASYT est né d'une conviction : l'IA doit aussi pouvoir fonctionner chez vous. Découvrez la vision et les valeurs derrière ce logiciel d'intelligence artificielle locale.">
+<meta name="twitter:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<noscript><style>.preloader{display:none!important}.reveal,.rise,.h1-step,.hero-mark{opacity:1!important;transform:none!important;animation:none!important}.accordion-panel{grid-template-rows:1fr!important}.accordion-panel .accordion-inner{visibility:visible!important}</style></noscript>
 </head>
-<body>
+<body id="top">
 <canvas id="data-canvas" aria-hidden="true"></canvas>
 <!-- Preloader -->
 <div class="preloader" id="preloader" aria-hidden="true">
@@ -52,35 +65,43 @@
   <div class="preloader-progress"></div>
 </div>
 
-
-
 <script>
 (function() {
+  var root = document.documentElement;
   var preloader = document.getElementById('preloader');
   if (!preloader) return;
-  
-  // Détecter si c'est la première visite ou une navigation interne
-  var isFirstVisit = !sessionStorage.getItem('asyt-visited');
-  var totalDuration = isFirstVisit ? 3800 : 1100;
-  
-  // Marquer comme visité
-  sessionStorage.setItem('asyt-visited', '1');
-  
-  // Appliquer une animation accélérée si ce n'est pas la première visite
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Première visite (animation complète) ou navigation interne (version accélérée)
+  var isFirstVisit = true;
+  try {
+    isFirstVisit = !sessionStorage.getItem('asyt-visited');
+    sessionStorage.setItem('asyt-visited', '1');
+  } catch (e) {}
+  var totalDuration = reduce ? 300 : (isFirstVisit ? 3800 : 1100);
+
   if (!isFirstVisit) {
     preloader.classList.add('preloader-fast');
   }
-  
+
+  // Les animations d'entrée de la page attendent la fin du préchargeur
+  root.classList.add('is-preloading');
+
+  var done = false;
   function hidePreloader() {
+    if (done) return;
+    done = true;
+    root.classList.remove('is-preloading');
     preloader.classList.add('is-hidden');
-    setTimeout(function() { 
-      if (preloader.parentNode) preloader.remove(); 
+    setTimeout(function() {
+      if (preloader.parentNode) preloader.remove();
     }, 800);
     document.body.style.overflow = '';
   }
-  
+
   document.body.style.overflow = 'hidden';
-  
+
   if (document.readyState === 'complete') {
     setTimeout(hidePreloader, totalDuration);
   } else {
@@ -93,51 +114,52 @@
 })();
 </script>
 
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo">
+    <a href="index.html" class="logo" aria-label="ASYT — Accueil">
       <span class="mark"></span>ASYT
     </a>
-    <nav class="nav" id="primary-nav">
+    <nav class="nav" id="primary-nav" aria-label="Navigation">
       <a href="index.html">Accueil</a>
-      <a href="a-propos.html" class="active">À propos</a>
-      <a href="services.html">Services</a>
+      <a href="services.html">Fonctionnalités</a>
+      <a href="a-propos.html" class="active" aria-current="page">À propos</a>
       <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
       <div class="lang-switch">
-        <a href="a-propos.html" class="lang active">FR</a>
-        <span class="lang-sep">/</span>
-        <a href="about.html" class="lang">EN</a>
+        <a href="a-propos.html" class="lang active" hreflang="fr" lang="fr" aria-label="Français" aria-current="true">FR</a>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a href="about.html" class="lang" hreflang="en" lang="en" aria-label="English">EN</a>
       </div>
     </nav>
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
+    <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu" tabindex="-1">
 
   <!-- HERO -->
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow rise rise-1">À propos</span>
-      <h1 class="rise rise-2">L'IA pour ceux qui ne peuvent pas se permettre une <span class="highlight">fuite.</span></h1>
-      <p class="lead rise rise-3">Cabinet d'ingénierie IA spécialisé : nous déployons l'intelligence artificielle pour les organisations qui traitent des données sensibles, sans jamais les exposer.</p>
+      <h1 class="rise rise-2 h1-long">ASYT est né d'une conviction&nbsp;: l'IA doit aussi pouvoir fonctionner <span class="highlight">chez&nbsp;vous.</span></h1>
     </div>
   </section>
 
-  <!-- NOTRE HISTOIRE -->
+  <!-- VISION -->
   <section>
     <div class="container">
-      <div class="hero-grid">
-        <div>
-          <span class="eyebrow">Notre raison d'être</span>
-          <h2 style="margin-top: 1rem;">Une conviction simple.</h2>
+      <div class="vision-grid">
+        <div class="reveal">
+          <span class="eyebrow">Notre vision</span>
         </div>
-        <div>
-          <p class="lead" style="margin-bottom: 1.2rem;">Les outils IA grand public ne sont pas faits pour ceux qui traitent des données confidentielles. Avocats, médecins, industriels, entrepreneurs : leurs données ne peuvent pas partir dans un cloud américain.</p>
-          <p>Nous avons créé ASYT pour ces organisations. Celles pour qui envoyer un fichier dans un chatbot américain n'est pas une option. Ils veulent les bénéfices de l'IA sans ses risques : confidentialité, propriété intellectuelle, conformité.</p>
+        <div class="prose reveal reveal-delay-1">
+          <p class="lead">L'intelligence artificielle transforme notre façon de travailler. Mais toutes les organisations ne souhaitent pas dépendre d'un service distant pour exploiter leurs informations.</p>
+          <p>ASYT explore une autre approche&nbsp;: rapprocher les capacités de l'IA des documents, des connaissances et de l'infrastructure de l'utilisateur.</p>
+          <p>Notre ambition est de construire un environnement d'intelligence artificielle locale, adaptable et transparent, dans lequel les utilisateurs gardent davantage de contrôle.</p>
         </div>
       </div>
     </div>
@@ -149,85 +171,25 @@
       <div class="band reveal">
         <div class="section-head" style="margin-bottom: 1rem;">
           <span class="eyebrow" style="color: var(--ink-soft);">Ce qui nous guide</span>
-          <h2>Quatre engagements <span class="highlight">non négociables.</span></h2>
+          <h2 class="chapter-title">Trois valeurs fondamentales.</h2>
         </div>
-        <div class="values-list">
+        <div class="values-list values-list--3">
           <div class="value-item">
-            <div class="num">ENGAGEMENT 01</div>
-            <h3>Souveraineté des données.</h3>
-            <p>Vos données ne quittent jamais votre périmètre. Tout se déploie chez vous.</p>
+            <div class="num">Valeur 01</div>
+            <h3>Confidentialité dès la conception.</h3>
+            <p>Privilégier le traitement local des informations et limiter les échanges externes non nécessaires.</p>
           </div>
           <div class="value-item">
-            <div class="num">ENGAGEMENT 02</div>
-            <h3>Honnêteté intellectuelle.</h3>
-            <p>Si l'IA n'est pas la bonne réponse à votre besoin, nous vous le disons. Nous préférons un client satisfait à un projet vendu.</p>
+            <div class="num">Valeur 02</div>
+            <h3>Indépendance technologique.</h3>
+            <p>Favoriser une architecture modulaire et la possibilité de choisir des composants compatibles.</p>
           </div>
           <div class="value-item">
-            <div class="num">ENGAGEMENT 03</div>
-            <h3>Maîtrise technique.</h3>
-            <p>Nous travaillons exclusivement avec des modèles que nous comprenons en profondeur. Pas de boîtes noires, pas de promesses creuses.</p>
-          </div>
-          <div class="value-item">
-            <div class="num">ENGAGEMENT 04</div>
-            <h3>Pédagogie continue.</h3>
-            <p>Nos clients ne deviennent pas dépendants de nous. Nous formons vos équipes à gouverner leur IA en autonomie.</p>
+            <div class="num">Valeur 03</div>
+            <h3>Amélioration continue.</h3>
+            <p>Développer, tester et faire évoluer les fonctionnalités en tenant compte des limites observées.</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- POUR QUI -->
-  <section>
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Nos clients</span>
-        <h2>Des organisations où la <span class="highlight">discrétion</span> est une norme professionnelle.</h2>
-      </div>
-      <div class="services-grid reveal">
-        <article class="service-card">
-          <span class="num">SECTEUR</span>
-          <h3>Cabinets d'avocats & notaires</h3>
-          <p>Analyse documentaire, recherche jurisprudentielle, rédaction assistée : le tout sans qu'aucun dossier ne sorte du cabinet.</p>
-        </article>
-        <article class="service-card">
-          <span class="num">SECTEUR</span>
-          <h3>Établissements de santé</h3>
-          <p>Synthèse de dossiers patients, aide au diagnostic, analyse de littérature médicale, dans un environnement HDS-conforme.</p>
-        </article>
-        <article class="service-card">
-          <span class="num">SECTEUR</span>
-          <h3>Industrie & R&D</h3>
-          <p>Exploitation de la connaissance interne, accélération de la R&D, sans risquer la fuite de propriété intellectuelle.</p>
-        </article>
-        <article class="service-card">
-          <span class="num">SECTEUR</span>
-          <h3>Finance & assurance</h3>
-          <p>Analyse réglementaire, traitement de documents financiers, KYC enrichi, sans transit vers des API tierces.</p>
-        </article>
-        <article class="service-card">
-          <span class="num">SECTEUR</span>
-          <h3>Entrepreneurs & dirigeants</h3>
-          <p>Pour ceux dont la stratégie, les fichiers clients ou les avant-projets ne peuvent prendre le moindre risque.</p>
-        </article>
-        <article class="service-card">
-          <span class="num">SECTEUR</span>
-          <h3>Secteur public & défense</h3>
-          <p>Déploiements souverains pour les administrations et opérateurs d'importance vitale, en environnement classifié si nécessaire.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CITATION -->
-  <section>
-    <div class="container">
-      <div class="quote-block reveal">
-        <span class="eyebrow" style="justify-content: center;">Notre conviction</span>
-        <p class="quote-text">
-          « L'IA la plus puissante n'est pas celle qui en sait le plus. C'est celle à qui vous pouvez confier ce que vous ne diriez à personne d'autre. »
-        </p>
-        <p class="quote-attr">— ASYT Associates</p>
       </div>
     </div>
   </section>
@@ -237,14 +199,17 @@
     <div class="container">
       <div class="cta-block reveal">
         <div>
-          <span class="eyebrow">Premier échange gratuit</span>
-          <h2 style="margin-top: 1rem;">Parlons de votre projet.</h2>
-          <p style="margin-top: 1.2rem; max-width: 50ch;">En une heure, nous clarifierons ce qui est faisable pour votre organisation, et ce qui ne l'est pas.</p>
+          <span class="eyebrow">Allons plus loin</span>
+          <h2 class="chapter-title" style="margin-top: 1rem;">Découvrez ce qu'ASYT pourrait apporter à votre organisation.</h2>
+          <p style="margin-top: 1.2rem; max-width: 52ch;">Vous souhaitez explorer l'intelligence artificielle locale, tester un cas d'usage ou mieux comprendre le fonctionnement d'ASYT&nbsp;?</p>
+          <p style="margin-top: 0.8rem; max-width: 52ch;">Présentez-nous votre projet. Nous pourrons échanger sur vos besoins, votre infrastructure et les possibilités du logiciel.</p>
         </div>
-        <a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener" class="btn btn-primary">
-          Réserver mon créneau gratuit
-          <span class="arrow">→</span>
-        </a>
+        <div class="cta-actions">
+          <a href="contact.html?sujet=demonstration#formulaire" class="btn btn-primary">Demander une démonstration <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="contact.html" class="btn btn-ghost">Nous contacter</a>
+          <a href="mailto:asyt.associates@outlook.com" class="cta-mail">asyt.associates@outlook.com</a>
+        </div>
+        <p class="cta-fine">ASYT est un logiciel en développement. La disponibilité et la maturité des fonctionnalités peuvent varier selon les versions.</p>
       </div>
     </div>
   </section>
@@ -258,29 +223,30 @@
         <div class="logo">
           <span class="mark"></span>ASYT
         </div>
-        <p>IA souveraine pour les environnements où la confidentialité est non négociable.</p>
+        <p>Logiciel d'intelligence artificielle locale pour vos documents et vos connaissances.</p>
       </div>
       <div class="footer-col">
-        <h5>Navigation</h5>
+        <p class="footer-col-title">Navigation</p>
         <ul>
           <li><a href="index.html">Accueil</a></li>
+          <li><a href="services.html">Fonctionnalités</a></li>
           <li><a href="a-propos.html">À propos</a></li>
-          <li><a href="services.html">Services</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <p class="footer-col-title">Contact</p>
         <ul>
           <li><a href="mailto:asyt.associates@outlook.com">asyt.associates@outlook.com</a></li>
           <li><a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener">Prendre rendez-vous</a></li>
         </ul>
       </div>
     </div>
+    <p class="footer-note">ASYT est un logiciel en développement&nbsp;: la disponibilité et la maturité des fonctionnalités varient selon les versions. Ce site utilise des services externes (formulaire Formspree, prise de rendez-vous Calendly, polices Google Fonts), distincts du fonctionnement local du logiciel.</p>
     <div class="footer-bottom">
       <span>© 2026 ASYT Associates. Tous droits réservés.</span>
-      <span>Paris · Conçu pour durer.</span>
+      <a href="#top">Haut de page</a>
     </div>
   </div>
 </footer>

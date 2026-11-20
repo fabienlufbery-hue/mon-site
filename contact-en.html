@@ -3,18 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — ASYT Associates</title>
-<meta name="description" content="Get in touch with ASYT Associates to discuss your sovereign AI project. First conversation is free and without commitment.">
+<title>Contact — Request a demo of ASYT</title>
+<meta name="description" content="Contact ASYT to request a demo, discover the software or discuss a local artificial intelligence need.">
+<meta name="theme-color" content="#FDF7F0">
+<link rel="canonical" href="https://fabienlufbery-hue.github.io/mon-site/contact-en.html">
+<link rel="alternate" hreflang="fr" href="https://fabienlufbery-hue.github.io/mon-site/contact.html">
+<link rel="alternate" hreflang="en" href="https://fabienlufbery-hue.github.io/mon-site/contact-en.html">
+<link rel="alternate" hreflang="x-default" href="https://fabienlufbery-hue.github.io/mon-site/contact.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="asyt-logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact — ASYT Associates">
-<meta property="og:description" content="Get in touch with ASYT Associates to discuss your sovereign AI project.">
-<meta property="og:image" content="asyt-logo.png">
+<meta property="og:site_name" content="ASYT">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta property="og:url" content="https://fabienlufbery-hue.github.io/mon-site/contact-en.html">
+<meta property="og:title" content="Contact — Request a demo of ASYT">
+<meta property="og:description" content="Contact ASYT to request a demo, discover the software or discuss a local artificial intelligence need.">
+<meta property="og:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<meta property="og:image:alt" content="ASYT Associates">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact — Request a demo of ASYT">
+<meta name="twitter:description" content="Contact ASYT to request a demo, discover the software or discuss a local artificial intelligence need.">
+<meta name="twitter:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<noscript><style>.preloader{display:none!important}.reveal,.rise,.h1-step,.hero-mark{opacity:1!important;transform:none!important;animation:none!important}.accordion-panel{grid-template-rows:1fr!important}.accordion-panel .accordion-inner{visibility:visible!important}</style></noscript>
 </head>
-<body>
+<body id="top">
 <canvas id="data-canvas" aria-hidden="true"></canvas>
 <!-- Preloader -->
 <div class="preloader" id="preloader" aria-hidden="true">
@@ -50,35 +65,43 @@
   <div class="preloader-progress"></div>
 </div>
 
-
-
 <script>
 (function() {
+  var root = document.documentElement;
   var preloader = document.getElementById('preloader');
   if (!preloader) return;
-  
-  // Détecter si c'est la première visite ou une navigation interne
-  var isFirstVisit = !sessionStorage.getItem('asyt-visited');
-  var totalDuration = isFirstVisit ? 3800 : 1100;
-  
-  // Marquer comme visité
-  sessionStorage.setItem('asyt-visited', '1');
-  
-  // Appliquer une animation accélérée si ce n'est pas la première visite
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Première visite (animation complète) ou navigation interne (version accélérée)
+  var isFirstVisit = true;
+  try {
+    isFirstVisit = !sessionStorage.getItem('asyt-visited');
+    sessionStorage.setItem('asyt-visited', '1');
+  } catch (e) {}
+  var totalDuration = reduce ? 300 : (isFirstVisit ? 3800 : 1100);
+
   if (!isFirstVisit) {
     preloader.classList.add('preloader-fast');
   }
-  
+
+  // Les animations d'entrée de la page attendent la fin du préchargeur
+  root.classList.add('is-preloading');
+
+  var done = false;
   function hidePreloader() {
+    if (done) return;
+    done = true;
+    root.classList.remove('is-preloading');
     preloader.classList.add('is-hidden');
-    setTimeout(function() { 
-      if (preloader.parentNode) preloader.remove(); 
+    setTimeout(function() {
+      if (preloader.parentNode) preloader.remove();
     }, 800);
     document.body.style.overflow = '';
   }
-  
+
   document.body.style.overflow = 'hidden';
-  
+
   if (document.readyState === 'complete') {
     setTimeout(hidePreloader, totalDuration);
   } else {
@@ -91,88 +114,87 @@
 })();
 </script>
 
+<a class="skip-link" href="#content">Skip to content</a>
+
 <header class="site-header">
   <div class="container">
-    <a href="index-en.html" class="logo">
+    <a href="index-en.html" class="logo" aria-label="ASYT — Home">
       <span class="mark"></span>ASYT
     </a>
-    <nav class="nav" id="primary-nav">
+    <nav class="nav" id="primary-nav" aria-label="Navigation">
       <a href="index-en.html">Home</a>
+      <a href="services-en.html">Features</a>
       <a href="about.html">About</a>
-      <a href="services-en.html">Services</a>
       <a href="faq-en.html">FAQ</a>
-      <a href="contact-en.html" class="active">Contact</a>
+      <a href="contact-en.html" class="active" aria-current="page">Contact</a>
       <div class="lang-switch">
-        <a href="contact.html" class="lang">FR</a>
-        <span class="lang-sep">/</span>
-        <a href="contact-en.html" class="lang active">EN</a>
+        <a href="contact.html" class="lang" hreflang="fr" lang="fr" aria-label="French">FR</a>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a href="contact-en.html" class="lang active" hreflang="en" lang="en" aria-label="English" aria-current="true">EN</a>
       </div>
     </nav>
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
+    <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="content" tabindex="-1">
 
+  <!-- HERO -->
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow rise rise-1">Contact</span>
-      <h1 class="rise rise-2">The first conversation is always <span class="highlight">free.</span></h1>
-      <p class="lead rise rise-3">A few lines about your context are enough. We'll respond within 48h, or offer you a slot directly.</p>
+      <h1 class="rise rise-2">Let's talk about your project <span class="highlight">with&nbsp;ASYT.</span></h1>
+      <p class="lead rise rise-3">Want to discover ASYT, request a demo or discuss a local artificial intelligence need? Tell us about your project.</p>
     </div>
   </section>
 
-  <section style="padding-top: 1rem;">
+  <!-- CONTACT -->
+  <section id="form" style="padding-top: 1rem;">
     <div class="container">
       <div class="contact-grid">
 
         <aside class="contact-info">
           <div class="item">
             <span class="eyebrow">Direct</span>
-            <h4 style="margin-top: 0.8rem;">Email</h4>
+            <p class="item-title">Email</p>
             <a href="mailto:asyt.associates@outlook.com">asyt.associates@outlook.com</a>
           </div>
           <div class="item">
-            <span class="eyebrow">Social</span>
-            <h4 style="margin-top: 0.8rem;">LinkedIn</h4>
+            <span class="eyebrow">Networks</span>
+            <p class="item-title">LinkedIn</p>
             <a href="https://fr.linkedin.com/company/asyt-associates" target="_blank" rel="noopener">ASYT Associates</a>
           </div>
           <div class="item">
-            <span class="eyebrow">Office</span>
-            <h4 style="margin-top: 0.8rem;">Paris</h4>
-            <p style="font-size: 0.95rem;">By appointment only.<br>Île-de-France, France.</p>
-          </div>
-          <div class="item">
-            <span class="eyebrow">Response time</span>
-            <h4 style="margin-top: 0.8rem;">Reactivity</h4>
-            <p style="font-size: 0.95rem;">Reply within 48h. First slot within 7 days.</p>
+            <span class="eyebrow">Appointment</span>
+            <p class="item-title">Calendly</p>
+            <a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener">Book a meeting</a>
           </div>
         </aside>
 
         <form class="contact-form" action="https://formspree.io/f/mykolpgj" method="POST">
-          <input type="hidden" name="_subject" value="New message from ASYT Associates website">
+          <input type="hidden" name="_subject" value="Nouveau message depuis le site ASYT Associates">
           <input type="hidden" name="_language" value="en">
           <div class="form-row">
             <div class="field">
               <label for="prenom">First name</label>
-              <input type="text" id="prenom" name="prenom" required>
+              <input type="text" id="prenom" name="prenom" autocomplete="given-name" required>
             </div>
             <div class="field">
               <label for="nom">Last name</label>
-              <input type="text" id="nom" name="nom" required>
+              <input type="text" id="nom" name="nom" autocomplete="family-name" required>
             </div>
           </div>
 
           <div class="form-row">
             <div class="field">
               <label for="email">Work email</label>
-              <input type="email" id="email" name="email" required>
+              <input type="email" id="email" name="email" autocomplete="email" required>
             </div>
             <div class="field">
-              <label for="entreprise">Company</label>
-              <input type="text" id="entreprise" name="entreprise" required>
+              <label for="entreprise">Company or organization</label>
+              <input type="text" id="entreprise" name="entreprise" autocomplete="organization" required>
             </div>
           </div>
 
@@ -183,7 +205,7 @@
               <option>Law firm / legal</option>
               <option>Healthcare / medical institution</option>
               <option>Finance / insurance</option>
-              <option>Industry / R&D</option>
+              <option>Industry / R&amp;D</option>
               <option>Public sector / defense</option>
               <option>Entrepreneur / executive</option>
               <option>Other</option>
@@ -191,43 +213,45 @@
           </div>
 
           <div class="field">
-            <label for="sujet">Type of request</label>
+            <label for="sujet">Subject of your request</label>
             <select id="sujet" name="sujet" required>
               <option value="">— Select —</option>
-              <option>AI strategy & advisory</option>
-              <option>On-premise AI deployment</option>
-              <option>Security & compliance audit</option>
-              <option>Team training</option>
-              <option>Exploratory discussion</option>
+              <option data-key="demonstration">Demo request</option>
+              <option data-key="decouverte">Discovering the software</option>
+              <option data-key="pro">Professional use</option>
+              <option data-key="deploiement">Local deployment</option>
+              <option data-key="partenariat">Partnership</option>
+              <option data-key="autre">Other request</option>
             </select>
           </div>
 
           <div class="field">
             <label for="message">Describe your need</label>
-            <textarea id="message" name="message" rows="6" placeholder="A few lines are enough. We'll dig in together on the call." required></textarea>
+            <textarea id="message" name="message" rows="6" placeholder="Your need, your context, your hardware. A few lines are enough." aria-describedby="form-warning" required></textarea>
           </div>
+
+          <p class="form-warning" id="form-warning" role="note">Please do not send passwords, confidential documents or other sensitive data through this form.</p>
 
           <button type="submit" class="btn btn-primary">
             Send my request
-            <span class="arrow">→</span>
+            <span class="arrow" aria-hidden="true">→</span>
           </button>
 
-          <p style="font-size: 0.82rem; color: var(--ink-muted); margin-top: 0.8rem; max-width: none;">
-            By submitting this form, you consent to be contacted by ASYT Associates regarding your request. Your data is neither sold nor shared.
-          </p>
+          <p class="form-consent">By submitting, you agree to be contacted about your request. This form is processed by an external provider (Formspree).</p>
         </form>
 
       </div>
     </div>
   </section>
 
+  <!-- TRANSPARENCE -->
   <section style="padding-top: 2rem;">
     <div class="container">
       <div class="band reveal">
         <div class="section-head" style="margin-bottom: 0;">
-          <span class="eyebrow" style="color: var(--ink-soft);">Confidentiality</span>
-          <h2 style="margin-top: 0.6rem;">We apply to our relationship<br>the same principles as to our work.</h2>
-          <p class="lead">Any information exchanged, including in a first call, is treated as strictly confidential. On request, we sign a non-disclosure agreement before any detailed discussion.</p>
+          <span class="eyebrow" style="color: var(--ink-soft);">Transparency</span>
+          <h2 class="chapter-title" style="margin-top: 0.6rem;">The software runs locally.<br>This website relies on external services.</h2>
+          <p class="lead">The form is processed by Formspree, appointment booking by Calendly and the typefaces are loaded from Google Fonts. Information sent from this website therefore passes through these providers.</p>
         </div>
       </div>
     </div>
@@ -242,29 +266,30 @@
         <div class="logo">
           <span class="mark"></span>ASYT
         </div>
-        <p>Artificial intelligence built for environments where confidentiality is not negotiable.</p>
+        <p>Local artificial intelligence software for your documents and knowledge.</p>
       </div>
       <div class="footer-col">
-        <h5>Navigation</h5>
+        <p class="footer-col-title">Navigation</p>
         <ul>
           <li><a href="index-en.html">Home</a></li>
+          <li><a href="services-en.html">Features</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="services-en.html">Services</a></li>
           <li><a href="faq-en.html">FAQ</a></li>
           <li><a href="contact-en.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <p class="footer-col-title">Contact</p>
         <ul>
           <li><a href="mailto:asyt.associates@outlook.com">asyt.associates@outlook.com</a></li>
           <li><a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener">Book a meeting</a></li>
         </ul>
       </div>
     </div>
+    <p class="footer-note">ASYT is software under development: feature availability and maturity vary between versions. This website uses external services (Formspree contact form, Calendly appointment booking, Google Fonts typefaces), which are separate from the software's local operation.</p>
     <div class="footer-bottom">
-      <span>© 2026 ASYT. All rights reserved.</span>
-      <span>Paris · Built to last.</span>
+      <span>© 2026 ASYT Associates. All rights reserved.</span>
+      <a href="#top">Back to top</a>
     </div>
   </div>
 </footer>

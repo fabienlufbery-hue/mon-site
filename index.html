@@ -3,20 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASYT — L'IA souveraine pour vos données sensibles</title>
-<meta name="description" content="ASYT Associates conçoit des intelligences artificielles sécurisées et souveraines pour les entreprises et entrepreneurs travaillant avec des données sensibles.">
+<title>ASYT — Intelligence artificielle locale pour vos documents et connaissances</title>
+<meta name="description" content="Découvrez ASYT, un logiciel d'intelligence artificielle locale conçu pour rechercher dans vos documents, organiser vos connaissances et explorer l'automatisation.">
+<meta name="theme-color" content="#FDF7F0">
+<link rel="canonical" href="https://fabienlufbery-hue.github.io/mon-site/">
+<link rel="alternate" hreflang="fr" href="https://fabienlufbery-hue.github.io/mon-site/">
+<link rel="alternate" hreflang="en" href="https://fabienlufbery-hue.github.io/mon-site/index-en.html">
+<link rel="alternate" hreflang="x-default" href="https://fabienlufbery-hue.github.io/mon-site/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/png" href="asyt-logo.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ASYT Associates — L'IA souveraine pour vos données sensibles">
-<meta property="og:description" content="ASYT Associates conçoit des intelligences artificielles sécurisées et 100% locales pour les organisations qui manipulent des données sensibles.">
-<meta property="og:image" content="asyt-logo.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="asyt-logo.png">
+<meta property="og:site_name" content="ASYT">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:url" content="https://fabienlufbery-hue.github.io/mon-site/">
+<meta property="og:title" content="ASYT — Intelligence artificielle locale pour vos documents et connaissances">
+<meta property="og:description" content="Découvrez ASYT, un logiciel d'intelligence artificielle locale conçu pour rechercher dans vos documents, organiser vos connaissances et explorer l'automatisation.">
+<meta property="og:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<meta property="og:image:alt" content="ASYT Associates">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASYT — Intelligence artificielle locale pour vos documents et connaissances">
+<meta name="twitter:description" content="Découvrez ASYT, un logiciel d'intelligence artificielle locale conçu pour rechercher dans vos documents, organiser vos connaissances et explorer l'automatisation.">
+<meta name="twitter:image" content="https://fabienlufbery-hue.github.io/mon-site/asyt-logo.png">
+<noscript><style>.preloader{display:none!important}.reveal,.rise,.h1-step,.hero-mark{opacity:1!important;transform:none!important;animation:none!important}.accordion-panel{grid-template-rows:1fr!important}.accordion-panel .accordion-inner{visibility:visible!important}</style></noscript>
 </head>
-<body>
+<body id="top">
 <canvas id="data-canvas" aria-hidden="true"></canvas>
 <!-- Preloader -->
 <div class="preloader" id="preloader" aria-hidden="true">
@@ -52,35 +65,43 @@
   <div class="preloader-progress"></div>
 </div>
 
-
-
 <script>
 (function() {
+  var root = document.documentElement;
   var preloader = document.getElementById('preloader');
   if (!preloader) return;
-  
-  // Détecter si c'est la première visite ou une navigation interne
-  var isFirstVisit = !sessionStorage.getItem('asyt-visited');
-  var totalDuration = isFirstVisit ? 3800 : 1100;
-  
-  // Marquer comme visité
-  sessionStorage.setItem('asyt-visited', '1');
-  
-  // Appliquer une animation accélérée si ce n'est pas la première visite
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Première visite (animation complète) ou navigation interne (version accélérée)
+  var isFirstVisit = true;
+  try {
+    isFirstVisit = !sessionStorage.getItem('asyt-visited');
+    sessionStorage.setItem('asyt-visited', '1');
+  } catch (e) {}
+  var totalDuration = reduce ? 300 : (isFirstVisit ? 3800 : 1100);
+
   if (!isFirstVisit) {
     preloader.classList.add('preloader-fast');
   }
-  
+
+  // Les animations d'entrée de la page attendent la fin du préchargeur
+  root.classList.add('is-preloading');
+
+  var done = false;
   function hidePreloader() {
+    if (done) return;
+    done = true;
+    root.classList.remove('is-preloading');
     preloader.classList.add('is-hidden');
-    setTimeout(function() { 
-      if (preloader.parentNode) preloader.remove(); 
+    setTimeout(function() {
+      if (preloader.parentNode) preloader.remove();
     }, 800);
     document.body.style.overflow = '';
   }
-  
+
   document.body.style.overflow = 'hidden';
-  
+
   if (document.readyState === 'complete') {
     setTimeout(hidePreloader, totalDuration);
   } else {
@@ -93,188 +114,348 @@
 })();
 </script>
 
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo" aria-label="ASYT Associates - Accueil">
+    <a href="index.html" class="logo" aria-label="ASYT — Accueil">
       <span class="mark"></span>ASYT
     </a>
-    <nav class="nav" id="primary-nav">
-      <a href="index.html" class="active">Accueil</a>
+    <nav class="nav" id="primary-nav" aria-label="Navigation">
+      <a href="index.html" class="active" aria-current="page">Accueil</a>
+      <a href="services.html">Fonctionnalités</a>
       <a href="a-propos.html">À propos</a>
-      <a href="services.html">Services</a>
       <a href="faq.html">FAQ</a>
       <a href="contact.html">Contact</a>
       <div class="lang-switch">
-        <a href="index.html" class="lang active">FR</a>
-        <span class="lang-sep">/</span>
-        <a href="index-en.html" class="lang">EN</a>
+        <a href="index.html" class="lang active" hreflang="fr" lang="fr" aria-label="Français" aria-current="true">FR</a>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a href="index-en.html" class="lang" hreflang="en" lang="en" aria-label="English">EN</a>
       </div>
     </nav>
-    <button class="menu-toggle" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
+    <button class="menu-toggle" type="button" aria-label="Menu" aria-controls="primary-nav" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById('primary-nav').classList.toggle('open');">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu" tabindex="-1">
 
-  <!-- HERO -->
-  <section class="hero">
+  <!-- CHAPITRE 01 — INTRODUCTION -->
+  <section class="hero" id="introduction">
     <div class="container">
       <div class="hero-grid">
         <div>
-          <span class="eyebrow rise rise-1">IA Sécurisée · Sur Mesure</span>
-          <h1 class="rise rise-2">
-            L'intelligence artificielle, sans compromis sur vos <span class="highlight">données.</span>
+          <span class="eyebrow rise rise-1">Intelligence artificielle locale</span>
+          <h1>
+            <span class="h1-step h1-step-1">ASYT.</span>
+            <span class="h1-step h1-step-2">L'intelligence artificielle, <span class="highlight">chez&nbsp;vous.</span></span>
           </h1>
-          <div class="hero-actions rise rise-4">
-            <a href="services.html" class="btn btn-primary">
-              Voir nos services
-              <span class="arrow">→</span>
+          <p class="lead hero-lead rise rise-late-1">Découvrez une nouvelle façon de travailler avec l'intelligence artificielle. ASYT réunit vos documents, vos connaissances et vos outils dans un environnement local, conçu pour vous laisser le contrôle.</p>
+          <p class="hero-tagline rise rise-late-2">Votre intelligence. Vos données. Votre environnement.</p>
+          <div class="hero-actions rise rise-late-3">
+            <a href="#decouvrir" class="btn btn-primary">
+              Découvrir ASYT
+              <span class="arrow" aria-hidden="true">→</span>
             </a>
-            <a href="contact.html" class="btn btn-ghost">Parler à un expert</a>
+            <a href="contact.html?sujet=demonstration#formulaire" class="btn btn-ghost">Demander une démonstration</a>
           </div>
         </div>
-        <div class="hero-side rise rise-3">
-          <img src="asyt-logo.png" alt="ASYT Associates" class="hero-logo">
-          <div class="hero-meta">
-            <p class="lead">
-              IA privée et locale pour les secteurs où les données ne peuvent pas sortir de votre périmètre : finance, santé, droit, défense, recherche.
-            </p>
-            <p>
-              Pas de cloud public. Pas de données qui transitent.
-            </p>
+        <div class="hero-side">
+          <div class="hero-mark">
+            <img src="asyt-logo.png" alt="ASYT Associates" class="hero-logo" width="1080" height="1080">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- INTERFACE PRODUIT -->
-  <section class="product-hero">
+  <!-- CHAPITRE 02 — LE CONSTAT -->
+  <section id="constat">
+    <div class="container">
+      <span class="chapter-tag" aria-hidden="true">02 / 07</span>
+      <div class="split">
+        <div class="reveal">
+          <span class="eyebrow">Le constat</span>
+          <h2 class="chapter-title">Vos données méritent mieux qu'un aller-retour dans le cloud.</h2>
+          <div class="prose">
+            <p>Contrats, rapports, recherches, documents techniques, informations stratégiques&nbsp;: les organisations produisent chaque jour des connaissances précieuses.</p>
+            <p>Pourtant, l'utilisation de certains services d'IA en ligne peut impliquer le transfert de contenus vers des infrastructures externes.</p>
+            <p class="statement">Et si votre intelligence artificielle pouvait travailler directement dans votre environnement&nbsp;?</p>
+          </div>
+        </div>
+        <figure class="flow reveal reveal-delay-2">
+          <div class="flow-stage">
+          <svg viewBox="0 0 400 320" role="img" aria-labelledby="flow-title" xmlns="http://www.w3.org/2000/svg" focusable="false">
+            <title id="flow-title">Schéma illustratif&nbsp;: des documents envoient des données vers des services externes, tandis que d'autres flux convergent vers un environnement local ASYT.</title>
+            <!-- Documents -->
+            <g class="flow-doc" fill="none" stroke-width="1.4" stroke-linejoin="round">
+              <path d="M24 66h26l12 12v36H24zM50 66v12h12M33 92h20M33 100h20"/>
+              <path d="M24 126h26l12 12v36H24zM50 126v12h12M33 152h20M33 160h20"/>
+              <path d="M24 186h26l12 12v36H24zM50 186v12h12M33 212h20M33 220h20"/>
+            </g>
+            <!-- Chemin vers des services externes (neutre) -->
+            <path class="flow-line-ext" d="M62 90 C 130 90, 170 55, 236 55" fill="none" stroke-width="1.2" stroke-linecap="round"/>
+            <rect class="flow-zone-ext" x="236" y="22" width="148" height="66" rx="14" fill="none" stroke-width="1.2" stroke-dasharray="4 5"/>
+            <!-- Chemins vers l'environnement local -->
+            <path class="flow-line-loc" d="M62 90 C 120 115, 170 170, 262 196" fill="none" stroke-width="1.3" stroke-linecap="round"/>
+            <path class="flow-line-loc" d="M62 150 C 130 158, 180 192, 262 199" fill="none" stroke-width="1.3" stroke-linecap="round"/>
+            <path class="flow-line-loc" d="M62 210 C 130 212, 180 206, 262 202" fill="none" stroke-width="1.3" stroke-linecap="round"/>
+            <!-- Périmètre protégé -->
+            <circle class="flow-ring-outer" cx="292" cy="200" r="78" fill="none" stroke-width="1"/>
+            <circle class="flow-ring" cx="292" cy="200" r="64" stroke-width="1.6"/>
+            <!-- Données qui circulent (animation SMIL, gelée si mouvement réduit) -->
+            <g>
+              <circle class="dot-ext" r="3" cx="0" cy="0"><animateMotion dur="4.8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;0" keyTimes="0;0.5;1" path="M62 90 C 130 90, 170 55, 236 55"/></circle>
+              <circle class="dot-ext" r="3" cx="0" cy="0"><animateMotion dur="4.8s" begin="-2.4s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;0" keyTimes="0;0.5;1" path="M62 90 C 130 90, 170 55, 236 55"/></circle>
+              <circle class="dot-loc" r="3.2" cx="0" cy="0"><animateMotion dur="3.6s" repeatCount="indefinite" path="M62 90 C 120 115, 170 170, 262 196"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3.6s" repeatCount="indefinite"/></circle>
+              <circle class="dot-loc" r="3.2" cx="0" cy="0"><animateMotion dur="3.6s" begin="-1.2s" repeatCount="indefinite" path="M62 150 C 130 158, 180 192, 262 199"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3.6s" begin="-1.2s" repeatCount="indefinite"/></circle>
+              <circle class="dot-loc" r="3.2" cx="0" cy="0"><animateMotion dur="3.6s" begin="-2.4s" repeatCount="indefinite" path="M62 210 C 130 212, 180 206, 262 202"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3.6s" begin="-2.4s" repeatCount="indefinite"/></circle>
+            </g>
+          </svg>
+            <span class="flow-label flow-label-docs">Vos documents</span>
+            <span class="flow-label flow-label-ext">Services externes</span>
+            <span class="flow-label flow-label-asyt" aria-hidden="true">ASYT</span>
+            <span class="flow-label flow-label-local">Environnement local</span>
+          </div>
+          <figcaption>Schéma illustratif. Selon les services utilisés, des contenus peuvent circuler vers des infrastructures externes. Avec ASYT, les fonctions locales s'exécutent dans votre environnement.</figcaption>
+        </figure>
+      </div>
+
+      <div class="stats arguments reveal">
+        <div class="stat">
+          <div class="num">01</div>
+          <h3 class="stat-title">Confidentialité</h3>
+          <p>Gardez la maîtrise des informations que vous choisissez de confier à votre IA.</p>
+        </div>
+        <div class="stat">
+          <div class="num">02</div>
+          <h3 class="stat-title">Indépendance</h3>
+          <p>Réduisez votre dépendance aux services externes pour les fonctionnalités exécutées localement.</p>
+        </div>
+        <div class="stat">
+          <div class="num">03</div>
+          <h3 class="stat-title">Continuité</h3>
+          <p>Continuez à exploiter les fonctions locales sans connexion Internet, après installation des composants nécessaires.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPITRE 03 — LA RÉVÉLATION D'ASYT -->
+  <section class="product-hero" id="decouvrir">
     <div class="product-backdrop" aria-hidden="true"></div>
     <div class="container">
-      <div class="product-showcase reveal">
-        <span class="eyebrow">Notre interface</span>
-        <h2 class="product-heading">Votre assistant privé,
-          conçu pour vos données.</h2>
-        <div class="product-stage">
+      <span class="chapter-tag" aria-hidden="true">03 / 07</span>
+      <div class="product-showcase">
+        <div class="reveal showcase-head">
+          <span class="eyebrow">Découvrez ASYT</span>
+          <h2 class="product-heading chapter-title">Une intelligence artificielle qui travaille dans votre environnement.</h2>
+          <div class="prose prose-center">
+            <p>ASYT est un logiciel d'intelligence artificielle locale qui associe conversation, recherche documentaire, mémoire et automatisation au sein d'une même interface.</p>
+            <p>Son objectif&nbsp;: rendre vos informations plus faciles à retrouver, à comprendre et à exploiter, sans imposer le recours permanent à un service distant.</p>
+          </div>
+        </div>
+        <div class="product-stage reveal">
           <figure class="product-img-frame">
+            <!-- À remplacer par une capture de l'interface actuelle dès qu'elle est disponible -->
             <img src="interface-asyt.png"
-                 alt="Interface de l'assistant IA privé ASYT"
-                 loading="lazy">
+                 alt="Capture d'écran de l'interface ASYT IA&nbsp;: menu latéral (nouvelle conversation, recherche, notes, espace de travail, dossiers, conversations) et champ de saisie d'une conversation."
+                 width="1919" height="893"
+                 loading="lazy" decoding="async">
           </figure>
         </div>
-        <p class="product-tagline">ASYT IA — assistant privé, déployé directement sur votre serveur</p>
+        <p class="product-tagline">Capture d'écran d'une version de l'interface ASYT. L'interface peut évoluer selon les versions.</p>
+
+        <div class="stats pillars reveal">
+          <div class="stat">
+            <div class="stat-kicker">Pilier 01</div>
+            <h3 class="stat-title">IA locale</h3>
+            <p>Exécutez des modèles d'intelligence artificielle compatibles directement sur votre matériel.</p>
+          </div>
+          <div class="stat">
+            <div class="stat-kicker">Pilier 02</div>
+            <h3 class="stat-title">Connaissance contextualisée</h3>
+            <p>Interrogez vos documents et retrouvez les éléments utiles à votre travail.</p>
+          </div>
+          <div class="stat">
+            <div class="stat-kicker">Pilier 03</div>
+            <h3 class="stat-title">Environnement évolutif</h3>
+            <p>Combinez progressivement modèles, mémoire et outils selon vos besoins.</p>
+          </div>
+        </div>
+        <a href="services.html" class="btn btn-primary reveal">
+          Explorer les fonctionnalités
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <section style="padding-top: 2rem;">
+  <!-- CHAPITRE 04 — LE CERVEAU LOCAL -->
+  <section id="coeur">
     <div class="container">
-      <div class="stats reveal">
-        <div class="stat">
-          <div class="num">100<span class="small">%</span></div>
-          <h4>Données souveraines</h4>
-          <p>Sur vos serveurs uniquement. Aucun transit.</p>
-        </div>
-        <div class="stat">
-          <div class="num">∞</div>
-          <h4>Sur-mesure intégral</h4>
-          <p>Conçu pour votre métier et vos contraintes.</p>
-        </div>
-        <div class="stat">
-          <div class="num">0</div>
-          <h4>Verrou propriétaire</h4>
-          <p>Open-source uniquement. Vous gardez le contrôle total.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES PREVIEW -->
-  <section>
-    <div class="container">
+      <span class="chapter-tag" aria-hidden="true">04 / 07</span>
       <div class="section-head reveal">
-        <span class="eyebrow">Nos expertises</span>
-        <h2>Une IA qui protège les secrets de votre métier.</h2>
-        <p class="lead">De l'audit à la mise en production : nous gérons l'ensemble du cycle IA sans exposer vos données.</p>
+        <span class="eyebrow">Au cœur d'ASYT</span>
+        <h2 class="chapter-title">Vos documents deviennent une connaissance exploitable.</h2>
+        <p class="lead">ASYT est conçu pour aller au-delà d'une simple conversation avec un modèle d'IA.</p>
+        <p>Il associe différentes briques technologiques pour retrouver des informations pertinentes, enrichir le contexte des échanges et organiser les connaissances dans la durée.</p>
       </div>
 
-      <div class="services-grid reveal">
-        <article class="service-card">
-          <span class="num">01 / Conseil</span>
-          <h3>Stratégie & Cadrage IA</h3>
-          <p>Nous identifions les cas d'usage à forte valeur et évaluons les risques avant tout déploiement.</p>
-          <a href="services.html#strategie" class="more">Voir la prestation</a>
+      <div class="hub">
+        <div class="hub-core reveal">
+          <div class="hub-core-node">
+            <span class="hub-core-name">ASYT</span>
+            <span class="hub-core-sub">Votre environnement</span>
+          </div>
+        </div>
+        <div class="hub-bus" aria-hidden="true"></div>
+
+        <article class="module hub-m1 reveal reveal-delay-1">
+          <div class="module-top"><span class="num">Module 01</span></div>
+          <h3>Recherche documentaire intelligente</h3>
+          <p>Importez vos documents, posez vos questions et retrouvez les informations pertinentes grâce à un système de recherche documentaire augmenté par l'IA, appelé RAG.</p>
+          <ol class="flow-steps">
+            <li>Documents</li>
+            <li>Indexation</li>
+            <li>Recherche</li>
+            <li>Réponse contextualisée</li>
+          </ol>
+          <p class="module-note">Les références documentaires sont affichées lorsque la version du logiciel permet de les fournir.</p>
+          <a href="services.html#rag" class="more-link">Voir la fonctionnalité</a>
         </article>
-        <article class="service-card">
-          <span class="num">02 / Build</span>
-          <h3>IA Privée & On-Premise</h3>
-          <p>IA déployée sur votre infrastructure. Zéro dépendance aux clouds publics.</p>
-          <a href="services.html#on-premise" class="more">Voir la prestation</a>
+
+        <article class="module hub-m2 reveal reveal-delay-2">
+          <div class="module-top"><span class="num">Module 02</span><span class="badge">En validation</span></div>
+          <h3>Mémoire persistante</h3>
+          <p>ASYT développe une mémoire locale indépendante du modèle de langage, destinée à conserver et retrouver des informations utiles entre plusieurs conversations.</p>
+          <p class="module-note">Fonctionnalité en cours de validation. Les informations mémorisées doivent pouvoir être contrôlées par l'utilisateur.</p>
+          <a href="services.html#memoire" class="more-link">Voir la fonctionnalité</a>
         </article>
-        <article class="service-card">
-          <span class="num">03 / Audit</span>
-          <h3>Sécurité & Conformité</h3>
-          <p>Audit de vos usages IA : fuites, prompt injection, RGPD, AI Act.</p>
-          <a href="services.html#audit" class="more">Voir la prestation</a>
+
+        <article class="module hub-m3 reveal reveal-delay-3">
+          <div class="module-top"><span class="num">Module 03</span><span class="badge">En développement</span></div>
+          <h3>Organisation des connaissances</h3>
+          <p>Reliez progressivement les documents, les notions et les informations pour mieux explorer les connaissances de votre environnement.</p>
+          <p class="module-note">Le graphe de connaissances et la visualisation 2D/3D sont des capacités en développement.</p>
+          <a href="services.html#memoire" class="more-link">Voir la fonctionnalité</a>
+        </article>
+
+        <article class="module hub-m4 reveal reveal-delay-1">
+          <div class="module-top"><span class="num">Module 04</span></div>
+          <h3>Modèles d'IA locaux</h3>
+          <p>Utilisez des modèles compatibles avec votre matériel et adaptez votre environnement d'IA à vos besoins.</p>
+          <p class="module-note">La compatibilité varie selon le modèle et le matériel&nbsp;: tous les modèles ne fonctionnent pas sur tous les ordinateurs.</p>
+          <a href="services.html#modeles" class="more-link">Voir la fonctionnalité</a>
+        </article>
+
+        <article class="module hub-m5 reveal reveal-delay-3">
+          <div class="module-top"><span class="num">Module 05</span><span class="badge">En développement</span></div>
+          <h3>Automatisation</h3>
+          <p>ASYT intègre un module d'automatisation en développement, conçu pour planifier et exécuter certaines tâches avec des outils et des modèles locaux, sous le contrôle de l'utilisateur.</p>
+          <p class="module-note">Toutes les tâches informatiques ne peuvent pas être automatisées.</p>
+          <a href="services.html#automatisation" class="more-link">Voir la fonctionnalité</a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- APPROCHE -->
-  <section>
+  <!-- CHAPITRE 05 — DÉMONSTRATION DU LOGICIEL -->
+  <section id="demonstration">
     <div class="container">
-      <div class="band reveal">
-        <div class="section-head" style="margin-bottom: 1rem;">
-          <span class="eyebrow" style="color: var(--ink-soft);">Notre approche</span>
-          <h2>La <span class="highlight">sécurité</span> d'abord.<br>L'IA ensuite.</h2>
-        </div>
-        <p class="lead" style="max-width: 60ch;">
-          La plupart des projets IA exposent des données sensibles sans le savoir. Nous faisons l'inverse : votre périmètre d'abord, l'IA autour.
-        </p>
-        <div class="values-list">
-          <div class="value-item">
-            <div class="num">PRINCIPE 01</div>
-            <h3>Aucune donnée ne sort.</h3>
-            <p>Vos données restent sur vos serveurs. Les modèles viennent à elles, pas l'inverse.</p>
-          </div>
-          <div class="value-item">
-            <div class="num">PRINCIPE 02</div>
-            <h3>Transparence intégrale.</h3>
-            <p>Code documenté, architectures auditables. Vous savez exactement ce que vous déployez.</p>
-          </div>
-          <div class="value-item">
-            <div class="num">PRINCIPE 03</div>
-            <h3>Indépendance technologique.</h3>
-            <p>Open-source maîtrisé. Pas de verrou, pas de dépendance.</p>
-          </div>
-          <div class="value-item">
-            <div class="num">PRINCIPE 04</div>
-            <h3>Accompagnement long terme.</h3>
-            <p>Nous formons vos équipes à l'autonomie dans la gouvernance IA.</p>
-          </div>
-        </div>
+      <span class="chapter-tag" aria-hidden="true">05 / 07</span>
+      <div class="section-head reveal">
+        <span class="eyebrow">ASYT en action</span>
+        <h2 class="chapter-title">Une interface. Plusieurs façons de travailler.</h2>
+        <p class="lead">ASYT rassemble différentes capacités d'intelligence artificielle dans une interface conçue pour faciliter le travail quotidien sur vos informations.</p>
+      </div>
+
+      <div class="scenarios">
+        <article class="scenario reveal reveal-delay-1">
+          <div class="scenario-head"><span class="num">Scénario 01</span><span class="badge">Illustration</span></div>
+          <h3>Interroger des documents</h3>
+          <div class="bubble"><span class="bubble-label">Question</span><p class="bubble-text">«&nbsp;Quelles sont les principales différences entre ces deux rapports&nbsp;?&nbsp;»</p></div>
+          <p>ASYT recherche les passages pertinents des documents disponibles et aide à formuler une réponse contextualisée.</p>
+        </article>
+        <article class="scenario reveal reveal-delay-2">
+          <div class="scenario-head"><span class="num">Scénario 02</span><span class="badge">Illustration</span></div>
+          <h3>Retrouver un contexte</h3>
+          <div class="bubble"><span class="bubble-label">Question</span><p class="bubble-text">«&nbsp;Peux-tu retrouver les informations que nous avons enregistrées sur ce projet&nbsp;?&nbsp;»</p></div>
+          <p>La mémoire locale vise à faciliter la continuité des échanges lorsque les informations ont été correctement enregistrées et retrouvées.</p>
+        </article>
+        <article class="scenario reveal reveal-delay-3">
+          <div class="scenario-head"><span class="num">Scénario 03</span><span class="badge">Illustration</span></div>
+          <h3>Préparer une automatisation</h3>
+          <div class="bubble"><span class="bubble-label">Demande</span><p class="bubble-text">«&nbsp;Prépare un rappel hebdomadaire pour vérifier les nouveaux documents du projet.&nbsp;»</p></div>
+          <p>Le module d'automatisation est conçu pour transformer certaines demandes en actions planifiées, avec des contrôles et autorisations adaptés.</p>
+        </article>
+      </div>
+      <p class="fineprint reveal">Scénarios illustratifs, à but pédagogique. Il ne s'agit ni de démonstrations réelles ni de résultats de tests.</p>
+      <div class="chapter-action reveal">
+        <a href="contact.html?sujet=demonstration#formulaire" class="btn btn-primary">
+          Demander une démonstration
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
+
+  <!-- CHAPITRE 06 — APPLICATIONS PROFESSIONNELLES -->
+  <section id="usages">
+    <div class="container">
+      <span class="chapter-tag" aria-hidden="true">06 / 07</span>
+      <div class="section-head reveal">
+        <span class="eyebrow">Cas d'usage</span>
+        <h2 class="chapter-title">Une intelligence locale adaptée à différents métiers.</h2>
+        <p class="lead">Chaque organisation possède ses documents, ses procédures et ses connaissances. ASYT est conçu pour aider à les exploiter avec l'intelligence artificielle, tout en tenant compte des contraintes de l'environnement de travail.</p>
+      </div>
+
+      <div class="services-grid cases-grid reveal">
+        <article class="service-card">
+          <span class="num">01</span>
+          <h3>Industrie et ingénierie</h3>
+          <p>Explorez des documentations techniques, procédures, historiques de projets et connaissances internes.</p>
+        </article>
+        <article class="service-card">
+          <span class="num">02</span>
+          <h3>Cabinets et professions du conseil</h3>
+          <p>Facilitez la recherche d'informations, la synthèse et la préparation de documents de travail.</p>
+        </article>
+        <article class="service-card">
+          <span class="num">03</span>
+          <h3>PME et directions</h3>
+          <p>Centralisez les connaissances utiles, préparez des synthèses et explorez de nouvelles possibilités d'automatisation.</p>
+        </article>
+        <article class="service-card">
+          <span class="num">04</span>
+          <h3>Recherche et développement</h3>
+          <p>Analysez des documents, rapprochez des informations et capitalisez sur les travaux existants.</p>
+        </article>
+      </div>
+      <p class="fineprint reveal">Les cas d'usage nécessitant des exigences réglementaires, de sécurité ou de qualité particulières doivent faire l'objet d'une évaluation spécifique.</p>
+    </div>
+  </section>
+
+  <!-- CHAPITRE 07 — PRISE DE CONTACT -->
 
   <!-- CTA -->
-  <section>
+  <section id="contact">
     <div class="container">
+      <span class="chapter-tag" aria-hidden="true">07 / 07</span>
       <div class="cta-block reveal">
         <div>
-          <span class="eyebrow">Premier échange gratuit</span>
-          <h2 style="margin-top: 1rem;">Une heure pour comprendre. Sans engagement.</h2>
-          <p style="margin-top: 1.2rem; max-width: 50ch;">Échangeons sur votre projet. Nous vous disons si l'IA est la bonne réponse, et comment la déployer sans exposer vos données.</p>
+          <span class="eyebrow">Allons plus loin</span>
+          <h2 class="chapter-title" style="margin-top: 1rem;">Découvrez ce qu'ASYT pourrait apporter à votre organisation.</h2>
+          <p style="margin-top: 1.2rem; max-width: 52ch;">Vous souhaitez explorer l'intelligence artificielle locale, tester un cas d'usage ou mieux comprendre le fonctionnement d'ASYT&nbsp;?</p>
+          <p style="margin-top: 0.8rem; max-width: 52ch;">Présentez-nous votre projet. Nous pourrons échanger sur vos besoins, votre infrastructure et les possibilités du logiciel.</p>
         </div>
-        <a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener" class="btn btn-primary">
-          Réserver mon créneau gratuit
-          <span class="arrow">→</span>
-        </a>
+        <div class="cta-actions">
+          <a href="contact.html?sujet=demonstration#formulaire" class="btn btn-primary">Demander une démonstration <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="contact.html" class="btn btn-ghost">Nous contacter</a>
+          <a href="mailto:asyt.associates@outlook.com" class="cta-mail">asyt.associates@outlook.com</a>
+        </div>
+        <p class="cta-fine">ASYT est un logiciel en développement. La disponibilité et la maturité des fonctionnalités peuvent varier selon les versions.</p>
       </div>
     </div>
   </section>
@@ -288,29 +469,30 @@
         <div class="logo">
           <span class="mark"></span>ASYT
         </div>
-        <p>IA souveraine pour les environnements où la confidentialité est non négociable.</p>
+        <p>Logiciel d'intelligence artificielle locale pour vos documents et vos connaissances.</p>
       </div>
       <div class="footer-col">
-        <h5>Navigation</h5>
+        <p class="footer-col-title">Navigation</p>
         <ul>
           <li><a href="index.html">Accueil</a></li>
+          <li><a href="services.html">Fonctionnalités</a></li>
           <li><a href="a-propos.html">À propos</a></li>
-          <li><a href="services.html">Services</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Contact</h5>
+        <p class="footer-col-title">Contact</p>
         <ul>
           <li><a href="mailto:asyt.associates@outlook.com">asyt.associates@outlook.com</a></li>
           <li><a href="https://calendly.com/asyt-associates/new-meeting" target="_blank" rel="noopener">Prendre rendez-vous</a></li>
         </ul>
       </div>
     </div>
+    <p class="footer-note">ASYT est un logiciel en développement&nbsp;: la disponibilité et la maturité des fonctionnalités varient selon les versions. Ce site utilise des services externes (formulaire Formspree, prise de rendez-vous Calendly, polices Google Fonts), distincts du fonctionnement local du logiciel.</p>
     <div class="footer-bottom">
       <span>© 2026 ASYT Associates. Tous droits réservés.</span>
-      <span>Paris · Conçu pour durer.</span>
+      <a href="#top">Haut de page</a>
     </div>
   </div>
 </footer>

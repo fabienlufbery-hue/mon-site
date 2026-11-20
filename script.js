@@ -1,6 +1,8 @@
-/* ASYT Associates — Animations & interactions */
+/* ASYT — Animations & interactions */
 (function() {
   'use strict';
+
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Particules de données (arrière-plan animé) ---------- */
   function initParticles() {
@@ -93,14 +95,14 @@
         ctx.fill();
       });
 
-      requestAnimationFrame(animate);
+      if (!reducedMotion) requestAnimationFrame(animate);
     }
 
-    window.addEventListener('mousemove', (e) => {
+    if (!reducedMotion) window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     });
-    window.addEventListener('mouseleave', () => {
+    if (!reducedMotion) window.addEventListener('mouseleave', () => {
       mouseX = -9999;
       mouseY = -9999;
     });
@@ -112,6 +114,7 @@
     window.addEventListener('resize', () => {
       resize();
       createParticles();
+      if (reducedMotion) animate(); // image fixe redessinée après redimensionnement
     });
   }
 
@@ -215,6 +218,64 @@
     });
   }
 
+  /* ---------- Schéma des données (chapitre 02) ----------
+     Animation SMIL : figée si l'utilisateur réduit les animations,
+     et mise en pause tant que le schéma n'est pas visible. */
+  function initFlowDiagram() {
+    var svg = document.querySelector('.flow-stage svg');
+    if (!svg || typeof svg.pauseAnimations !== 'function') return;
+
+    if (reducedMotion) {
+      svg.pauseAnimations();
+      svg.setCurrentTime(1.6); // instant représentatif : données en route vers l'environnement local
+      return;
+    }
+    svg.pauseAnimations();
+    if (!('IntersectionObserver' in window)) { svg.unpauseAnimations(); return; }
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) svg.unpauseAnimations();
+        else svg.pauseAnimations();
+      });
+    }, { threshold: 0.1 }).observe(svg);
+  }
+
+  /* ---------- Formulaire : sujet présélectionné via ?sujet=... ---------- */
+  function initFormPrefill() {
+    var select = document.getElementById('sujet');
+    if (!select || !window.URLSearchParams) return;
+    var wanted = new URLSearchParams(window.location.search).get('sujet');
+    if (!wanted) return;
+    var options = select.querySelectorAll('option[data-key]');
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].getAttribute('data-key') === wanted) {
+        select.value = options[i].value;
+        break;
+      }
+    }
+  }
+
+  /* ---------- Menu mobile : focus à l'ouverture, Échap pour fermer ---------- */
+  function initMenuEscape() {
+    var nav = document.getElementById('primary-nav');
+    var toggle = document.querySelector('.menu-toggle');
+    if (!nav || !toggle) return;
+    // Le menu précède le bouton dans le HTML : on envoie le focus au premier lien à l'ouverture
+    toggle.addEventListener('click', function() {
+      if (toggle.getAttribute('aria-expanded') === 'true') {
+        var first = nav.querySelector('a');
+        if (first) first.focus();
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+  }
+
   /* ---------- Initialisation au chargement ---------- */
   function init() {
     initParticles();
@@ -223,6 +284,9 @@
     initCounters();
     initParallax();
     initAccordions();
+    initFlowDiagram();
+    initFormPrefill();
+    initMenuEscape();
   }
 
   if (document.readyState === 'loading') {
