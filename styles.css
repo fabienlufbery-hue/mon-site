@@ -2020,12 +2020,18 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
 /* ---------- Accueil centré (FR / EN) ---------- */
 .hero.hero--centered {
   min-height: calc(100svh - 80px);
-  display: flex;
-  align-items: center;
-  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(2.5rem, 5vw, 5rem) 0;
+}
+.hero.hero--centered > .container {
+  width: 100%;
 }
 .hero-grid.hero-grid--centered {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  width: 100%;
   max-width: 960px;
   margin-inline: auto;
   text-align: center;
@@ -2034,6 +2040,10 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  max-width: 880px;
+  margin-inline: auto;
+  text-align: center;
 }
 .hero-grid--centered .hero-content h1 {
   width: 100%;
