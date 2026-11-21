@@ -2061,7 +2061,6 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
   line-height: 1.12;
   letter-spacing: -0.02em;
   max-width: 18ch;
-  margin-top: 1.3rem;
   text-wrap: balance;
 }
 .cvl-sub {
@@ -2232,21 +2231,12 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
   .cvl-panel--local:hover .cvl-links .cvl-link { opacity: 0.7; }
 }
 
-/* --- Mention et arguments --- */
-.cvl-note {
-  max-width: 78ch;
-  margin: 1.75rem auto 0;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  line-height: 1.65;
-  color: var(--ink-muted);
-  text-align: center;
-}
+/* --- Arguments --- */
 .cvl-args {
   list-style: none;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  margin-top: clamp(3rem, 6vw, 5rem);
+  margin-top: clamp(2.75rem, 6vw, 4.5rem); /* même écart qu'entre l'en-tête et les panneaux */
   border-top: 1px solid var(--line);
 }
 .cvl-arg {
