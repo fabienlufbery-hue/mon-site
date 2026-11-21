@@ -2052,6 +2052,15 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
   margin-top: 0;
   margin-bottom: 0.75rem;
 }
+/* « chez vous. » / « on your terms. » : en ligne (display: inline), le padding
+   vertical du surlignage n'entre pas dans la hauteur de ligne et le fond noir
+   débordait sur la ligne du dessus. En bloc centré, la boîte entière (padding
+   compris) participe à la mise en page : plus de chevauchement, ligne dédiée. */
+.hero-grid--centered .hero-content h1 .highlight {
+  display: block;
+  width: fit-content;
+  margin: 0.2em auto 0;
+}
 .hero-grid--centered .hero-lead {
   max-width: 62ch;
   margin-inline: auto;
@@ -2076,17 +2085,10 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
   transform: none;
 }
 .hero-grid--centered .btn-download:disabled::before { display: none; }
-.hero-grid--centered .download-note {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: 0.77rem;
-  letter-spacing: 0.035em;
-  color: var(--ink-muted);
-}
 @media (max-width: 760px) {
   .hero.hero--centered {
     min-height: calc(100svh - 72px);
-    padding: 3.5rem 0 4.5rem;
+    padding: 4rem 0;
   }
   .hero-grid--centered .hero-content h1 {
     font-size: clamp(2rem, 7.2vw, 3.1rem);
