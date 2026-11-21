@@ -218,26 +218,19 @@
     });
   }
 
-  /* ---------- Schéma des données (chapitre 02) ----------
-     Animation SMIL : figée si l'utilisateur réduit les animations,
-     et mise en pause tant que le schéma n'est pas visible. */
-  function initFlowDiagram() {
-    var svg = document.querySelector('.flow-stage svg');
-    if (!svg || typeof svg.pauseAnimations !== 'function') return;
-
-    if (reducedMotion) {
-      svg.pauseAnimations();
-      svg.setCurrentTime(1.6); // instant représentatif : données en route vers l'environnement local
-      return;
-    }
-    svg.pauseAnimations();
-    if (!('IntersectionObserver' in window)) { svg.unpauseAnimations(); return; }
+  /* ---------- Comparaison cloud / local (chapitre 02) ----------
+     L'apparition passe par .reveal (initScrollReveal). Ici, on met en
+     pause les animations permanentes tant que la comparaison est hors écran. */
+  function initCompare() {
+    var section = document.querySelector('.cvl');
+    var target = section && section.querySelector('.cvl-compare');
+    if (!target || !('IntersectionObserver' in window)) return;
+    section.classList.add('cvl-idle');
     new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) svg.unpauseAnimations();
-        else svg.pauseAnimations();
+        section.classList.toggle('cvl-idle', !entry.isIntersecting);
       });
-    }, { threshold: 0.1 }).observe(svg);
+    }, { rootMargin: '120px 0px' }).observe(target);
   }
 
   /* ---------- Formulaire : sujet présélectionné via ?sujet=... ---------- */
@@ -284,7 +277,7 @@
     initCounters();
     initParallax();
     initAccordions();
-    initFlowDiagram();
+    initCompare();
     initFormPrefill();
     initMenuEscape();
   }

@@ -157,75 +157,157 @@ ASYT
     </div>
   </section>
 
-  <!-- CHAPITRE 02 — LE CONSTAT -->
-  <section id="constat">
+  <!-- CHAPITRE 02 — LE CONSTAT : comparaison IA dans le cloud / ASYT en local -->
+  <section class="cvl" id="constat">
     <div class="container">
       <span class="chapter-tag" aria-hidden="true">02 / 07</span>
-      <div class="split">
-        <div class="reveal">
-          <span class="eyebrow">Le constat</span>
-          <h2 class="chapter-title">Vos données méritent mieux qu'un aller-retour dans le cloud.</h2>
-          <div class="prose">
-            <p>Contrats, rapports, recherches, documents techniques, informations stratégiques&nbsp;: les organisations produisent chaque jour des connaissances précieuses.</p>
-            <p>Pourtant, l'utilisation de certains services d'IA en ligne peut impliquer le transfert de contenus vers des infrastructures externes.</p>
-            <p class="statement">Et si votre intelligence artificielle pouvait travailler directement dans votre environnement&nbsp;?</p>
-          </div>
+
+      <header class="cvl-head reveal">
+        <span class="eyebrow">02 / Le constat</span>
+        <h2 class="cvl-title">Et si vos données restaient chez vous&nbsp;?</h2>
+        <p class="cvl-sub">Une intelligence artificielle performante ne devrait pas vous obliger à choisir entre innovation et maîtrise de vos informations.</p>
+      </header>
+
+      <div class="cvl-compare">
+        <!-- Panneau 1 — IA dans le cloud -->
+        <div class="cvl-slot cvl-slot--cloud reveal">
+          <article class="cvl-panel cvl-panel--cloud" aria-labelledby="cvl-cloud-h">
+            <header class="cvl-panel-head">
+              <h3 class="cvl-panel-title" id="cvl-cloud-h">IA dans le cloud</h3>
+              <p class="cvl-panel-sub">Traitement sur des serveurs distants</p>
+            </header>
+            <figure class="cvl-stage">
+              <svg class="cvl-svg" viewBox="0 0 480 280" role="img" aria-labelledby="cvl-cloud-desc" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <title id="cvl-cloud-desc">Schéma illustratif : des données partent d'un document et circulent par Internet jusqu'à des serveurs distants.</title>
+                <!-- Connexions document → serveurs -->
+                <g class="cvl-links" fill="none" stroke-linecap="round">
+                  <path class="cvl-link" pathLength="1" d="M128 128 L342 120" style="--d:0.85s"/>
+                  <path class="cvl-link" pathLength="1" d="M128 144 L342 142" style="--d:0.95s"/>
+                  <path class="cvl-link" pathLength="1" d="M128 160 L342 164" style="--d:1.05s"/>
+                </g>
+                <!-- Document -->
+                <g class="cvl-build cvl-doc" style="--d:0.25s">
+                  <path class="cvl-paper" d="M56 96h56l16 16v80H56z"/>
+                  <path class="cvl-paper-fold" d="M112 96v16h16"/>
+                  <path class="cvl-paper-lines" d="M68 128h44M68 140h48M68 152h36M68 164h44M68 176h28"/>
+                </g>
+                <!-- Nuage et serveurs distants -->
+                <g class="cvl-build cvl-cloud" style="--d:0.5s">
+                  <path class="cvl-cloud-shape" d="M318 214 H434 A36 36 0 1 0 433.7 142 A56 56 0 1 0 325.5 138.7 A38 38 0 1 0 318 214 Z"/>
+                  <g class="cvl-rack">
+                    <rect x="342" y="112" width="76" height="16" rx="3"/>
+                    <rect x="342" y="134" width="76" height="16" rx="3"/>
+                    <rect x="342" y="156" width="76" height="16" rx="3"/>
+                    <path class="cvl-rack-slots" d="M350 120h22M350 142h22M350 164h22"/>
+                  </g>
+                  <g class="cvl-leds">
+                    <circle class="cvl-led cvl-loop" cx="409" cy="120" r="2" style="--d:0s"/>
+                    <circle class="cvl-led cvl-loop" cx="409" cy="142" r="2" style="--d:-1.1s"/>
+                    <circle class="cvl-led cvl-loop" cx="409" cy="164" r="2" style="--d:-2.3s"/>
+                  </g>
+                </g>
+                <!-- Particules : document → serveurs -->
+                <g class="cvl-dots cvl-dots--cloud">
+                  <circle class="cvl-dot cvl-loop" cx="128" cy="128" r="3.4" style="--dx:214px;--dy:-8px;--p:.7;--t:1.9s"/>
+                  <circle class="cvl-dot cvl-loop" cx="128" cy="144" r="3.4" style="--dx:214px;--dy:-2px;--p:.35;--t:3.5s"/>
+                  <circle class="cvl-dot cvl-loop" cx="128" cy="160" r="3.4" style="--dx:214px;--dy:4px;--p:.55;--t:5.1s"/>
+                  <circle class="cvl-dot cvl-loop" cx="128" cy="144" r="3.4" style="--dx:214px;--dy:-2px;--p:.85;--t:6.7s"/>
+                </g>
+              </svg>
+              <span class="cvl-label" style="--x:19.2%;--y:76%" aria-hidden="true">Vos documents</span>
+              <span class="cvl-label" style="--x:49%;--y:37%" aria-hidden="true">Internet</span>
+              <span class="cvl-label" style="--x:78.3%;--y:85%" aria-hidden="true">Serveurs distants</span>
+            </figure>
+            <p class="cvl-panel-text">Selon le service utilisé, vos informations peuvent transiter par des infrastructures externes.</p>
+          </article>
         </div>
-        <figure class="flow reveal reveal-delay-2">
-          <div class="flow-stage">
-          <svg viewBox="0 0 400 320" role="img" aria-labelledby="flow-title" xmlns="http://www.w3.org/2000/svg" focusable="false">
-            <title id="flow-title">Schéma illustratif&nbsp;: des documents envoient des données vers des services externes, tandis que d'autres flux convergent vers un environnement local ASYT.</title>
-            <!-- Documents -->
-            <g class="flow-doc" fill="none" stroke-width="1.4" stroke-linejoin="round">
-              <path d="M24 66h26l12 12v36H24zM50 66v12h12M33 92h20M33 100h20"/>
-              <path d="M24 126h26l12 12v36H24zM50 126v12h12M33 152h20M33 160h20"/>
-              <path d="M24 186h26l12 12v36H24zM50 186v12h12M33 212h20M33 220h20"/>
-            </g>
-            <!-- Chemin vers des services externes (neutre) -->
-            <path class="flow-line-ext" d="M62 90 C 130 90, 170 55, 236 55" fill="none" stroke-width="1.2" stroke-linecap="round"/>
-            <rect class="flow-zone-ext" x="236" y="22" width="148" height="66" rx="14" fill="none" stroke-width="1.2" stroke-dasharray="4 5"/>
-            <!-- Chemins vers l'environnement local -->
-            <path class="flow-line-loc" d="M62 90 C 120 115, 170 170, 262 196" fill="none" stroke-width="1.3" stroke-linecap="round"/>
-            <path class="flow-line-loc" d="M62 150 C 130 158, 180 192, 262 199" fill="none" stroke-width="1.3" stroke-linecap="round"/>
-            <path class="flow-line-loc" d="M62 210 C 130 212, 180 206, 262 202" fill="none" stroke-width="1.3" stroke-linecap="round"/>
-            <!-- Périmètre protégé -->
-            <circle class="flow-ring-outer" cx="292" cy="200" r="78" fill="none" stroke-width="1"/>
-            <circle class="flow-ring" cx="292" cy="200" r="64" stroke-width="1.6"/>
-            <!-- Données qui circulent (animation SMIL, gelée si mouvement réduit) -->
-            <g>
-              <circle class="dot-ext" r="3" cx="0" cy="0"><animateMotion dur="4.8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;0" keyTimes="0;0.5;1" path="M62 90 C 130 90, 170 55, 236 55"/></circle>
-              <circle class="dot-ext" r="3" cx="0" cy="0"><animateMotion dur="4.8s" begin="-2.4s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;0" keyTimes="0;0.5;1" path="M62 90 C 130 90, 170 55, 236 55"/></circle>
-              <circle class="dot-loc" r="3.2" cx="0" cy="0"><animateMotion dur="3.6s" repeatCount="indefinite" path="M62 90 C 120 115, 170 170, 262 196"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3.6s" repeatCount="indefinite"/></circle>
-              <circle class="dot-loc" r="3.2" cx="0" cy="0"><animateMotion dur="3.6s" begin="-1.2s" repeatCount="indefinite" path="M62 150 C 130 158, 180 192, 262 199"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3.6s" begin="-1.2s" repeatCount="indefinite"/></circle>
-              <circle class="dot-loc" r="3.2" cx="0" cy="0"><animateMotion dur="3.6s" begin="-2.4s" repeatCount="indefinite" path="M62 210 C 130 212, 180 206, 262 202"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="3.6s" begin="-2.4s" repeatCount="indefinite"/></circle>
-            </g>
-          </svg>
-            <span class="flow-label flow-label-docs">Vos documents</span>
-            <span class="flow-label flow-label-ext">Services externes</span>
-            <span class="flow-label flow-label-asyt" aria-hidden="true">ASYT</span>
-            <span class="flow-label flow-label-local">Environnement local</span>
-          </div>
-          <figcaption>Schéma illustratif. Selon les services utilisés, des contenus peuvent circuler vers des infrastructures externes. Avec ASYT, les fonctions locales s'exécutent dans votre environnement.</figcaption>
-        </figure>
+
+        <!-- Panneau 2 — ASYT en local -->
+        <div class="cvl-slot cvl-slot--local reveal">
+          <article class="cvl-panel cvl-panel--local" aria-labelledby="cvl-local-h">
+            <header class="cvl-panel-head">
+              <h3 class="cvl-panel-title" id="cvl-local-h">ASYT en local</h3>
+              <p class="cvl-panel-sub">Traitement directement sur votre ordinateur</p>
+            </header>
+            <figure class="cvl-stage">
+              <svg class="cvl-svg" viewBox="0 0 480 280" role="img" aria-labelledby="cvl-local-desc" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <title id="cvl-local-desc">Schéma illustratif : dans un ordinateur, des documents échangent des informations avec le noyau ASYT ; les flux restent à l'intérieur de l'ordinateur.</title>
+                <defs>
+                  <radialGradient id="cvl-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0" stop-color="#D3C4AC" stop-opacity="0.75"/>
+                    <stop offset="0.6" stop-color="#E5DBC8" stop-opacity="0.35"/>
+                    <stop offset="1" stop-color="#FDF7F0" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <!-- Ordinateur -->
+                <g class="cvl-build cvl-laptop" style="--d:0.25s">
+                  <rect class="cvl-screen" x="92" y="20" width="296" height="196" rx="14"/>
+                  <rect class="cvl-display" x="104" y="32" width="272" height="172" rx="7"/>
+                  <path class="cvl-base" d="M74 222 H406 V224 Q406 234 394 234 H86 Q74 234 74 224 Z"/>
+                  <path class="cvl-notch" d="M214 222.5 q0 4 6 4 h40 q6 0 6 -4"/>
+                </g>
+                <!-- Périmètre local -->
+                <rect class="cvl-build cvl-perimeter" x="118" y="44" width="244" height="148" rx="10" style="--d:0.55s"/>
+                <!-- Connexions entre documents (organisation des connaissances) -->
+                <g class="cvl-graph" fill="none" stroke-linecap="round">
+                  <path class="cvl-link cvl-link--graph" pathLength="1" d="M156 88 V150" style="--d:1.15s;--g:0s"/>
+                  <path class="cvl-link cvl-link--graph" pathLength="1" d="M324 88 V150" style="--d:1.2s;--g:-1.6s"/>
+                  <path class="cvl-link cvl-link--graph" pathLength="1" d="M170 66 Q240 40 310 66" style="--d:1.25s;--g:-3.2s"/>
+                  <path class="cvl-link cvl-link--graph" pathLength="1" d="M170 172 Q240 198 310 172" style="--d:1.3s;--g:-4.8s"/>
+                </g>
+                <!-- Connexions documents ↔ ASYT -->
+                <g class="cvl-links" fill="none" stroke-linecap="round">
+                  <path class="cvl-link" pathLength="1" d="M172 80 L212 102" style="--d:0.95s"/>
+                  <path class="cvl-link" pathLength="1" d="M308 80 L268 102" style="--d:1s"/>
+                  <path class="cvl-link" pathLength="1" d="M172 158 L212 136" style="--d:1.05s"/>
+                  <path class="cvl-link" pathLength="1" d="M308 158 L268 136" style="--d:1.1s"/>
+                </g>
+                <!-- Documents -->
+                <g class="cvl-build cvl-minidocs" style="--d:0.7s">
+                  <path class="cvl-paper" d="M144 54h18l8 8v26h-26zM144 132h18l8 8v26h-26zM310 54h18l8 8v26h-26zM310 132h18l8 8v26h-26z"/>
+                  <path class="cvl-paper-lines" d="M149 70h14M149 76h16M149 82h10M149 148h14M149 154h16M149 160h10M315 70h14M315 76h16M315 82h10M315 148h14M315 154h16M315 160h10"/>
+                </g>
+                <!-- Noyau ASYT -->
+                <g class="cvl-build cvl-core" style="--d:0.45s">
+                  <circle class="cvl-core-glow cvl-loop" cx="240" cy="119" r="50" fill="url(#cvl-glow)"/>
+                  <circle class="cvl-core-orbit" cx="240" cy="119" r="40"/>
+                  <circle class="cvl-core-ring" cx="240" cy="119" r="30"/>
+                  <text class="cvl-core-name" x="240" y="125" text-anchor="middle">ASYT</text>
+                </g>
+                <!-- Particules : documents ↔ ASYT, confinées dans l'ordinateur -->
+                <g class="cvl-dots cvl-dots--local">
+                  <circle class="cvl-dot cvl-loop" cx="172" cy="80" r="3" style="--dx:40px;--dy:22px;--p:.6;--t:1.9s"/>
+                  <circle class="cvl-dot cvl-loop" cx="308" cy="158" r="3" style="--dx:-40px;--dy:-22px;--p:.4;--t:2.9s"/>
+                  <circle class="cvl-dot cvl-dot--out cvl-loop" cx="268" cy="102" r="3" style="--dx:40px;--dy:-22px;--p:.5;--t:3.9s"/>
+                  <circle class="cvl-dot cvl-dot--out cvl-loop" cx="212" cy="136" r="3" style="--dx:-40px;--dy:22px;--p:.3;--t:4.9s"/>
+                </g>
+              </svg>
+              <span class="cvl-label cvl-label--strong" style="--x:50%;--y:93%" aria-hidden="true">Votre ordinateur</span>
+            </figure>
+            <p class="cvl-panel-text">Avec ASYT, les traitements locaux s'exécutent directement dans votre environnement.</p>
+          </article>
+        </div>
       </div>
 
-      <div class="stats arguments reveal">
-        <div class="stat">
-          <div class="num">01</div>
-          <h3 class="stat-title">Confidentialité</h3>
-          <p>Gardez la maîtrise des informations que vous choisissez de confier à votre IA.</p>
-        </div>
-        <div class="stat">
-          <div class="num">02</div>
-          <h3 class="stat-title">Indépendance</h3>
-          <p>Réduisez votre dépendance aux services externes pour les fonctionnalités exécutées localement.</p>
-        </div>
-        <div class="stat">
-          <div class="num">03</div>
-          <h3 class="stat-title">Continuité</h3>
-          <p>Continuez à exploiter les fonctions locales sans connexion Internet, après installation des composants nécessaires.</p>
-        </div>
-      </div>
+      <p class="cvl-note reveal">Schémas illustratifs. Les modèles locaux d'ASYT s'exécutent sur votre matériel et vos documents y sont stockés. Les fonctions Web, utilisées à votre demande, peuvent échanger des données via Internet.</p>
+
+      <ul class="cvl-args" role="list">
+        <li class="cvl-arg reveal">
+          <svg class="cvl-arg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l7 2.8v5.4c0 4.4-2.9 8-7 9.8-4.1-1.8-7-5.4-7-9.8V5.8z"/><path d="M9.2 12.1l2 2 3.8-3.9"/></svg>
+          <h3 class="cvl-arg-title">Confidentialité</h3>
+          <p>Gardez la maîtrise des informations que vous confiez à votre IA.</p>
+        </li>
+        <li class="cvl-arg reveal reveal-delay-1">
+          <svg class="cvl-arg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.6 9.6a11 11 0 0 1 3.1-1.9M12 7a11 11 0 0 1 7.4 2.6M7.4 12.9a6.4 6.4 0 0 1 2.4-1.4M14.8 11.7a6.4 6.4 0 0 1 1.8 1.2M10.3 16.2a2.6 2.6 0 0 1 3.4 0"/><circle cx="12" cy="19" r="0.6"/><path d="M4 4l16 16"/></svg>
+          <h3 class="cvl-arg-title">Hors ligne</h3>
+          <p>Utilisez les fonctions locales sans connexion Internet, après installation des composants nécessaires.</p>
+        </li>
+        <li class="cvl-arg reveal reveal-delay-2">
+          <svg class="cvl-arg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/><rect x="9.75" y="9.75" width="4.5" height="4.5" rx="0.8"/><path d="M9.5 3v3.5M14.5 3v3.5M9.5 17.5V21M14.5 17.5V21M3 9.5h3.5M3 14.5h3.5M17.5 9.5H21M17.5 14.5H21"/></svg>
+          <h3 class="cvl-arg-title">Indépendance</h3>
+          <p>Exécutez votre intelligence artificielle sur votre propre matériel.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
