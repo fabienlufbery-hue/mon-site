@@ -2049,8 +2049,8 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
   width: 100%;
   font-size: clamp(2.4rem, 4.4vw, 4.1rem);
   line-height: 1.25;
-  margin-top: 1.7rem;
-  margin-bottom: 1.75rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
 }
 .hero-grid--centered .hero-lead {
   max-width: 62ch;
@@ -2062,7 +2062,7 @@ html.is-preloading .hero-mark { animation-play-state: paused; }
   align-items: center;
   flex-direction: column;
   gap: 0.7rem;
-  margin-top: 2.2rem;
+  margin-top: 1.6rem;
 }
 .hero-grid--centered .hero-actions .btn-download {
   min-width: 230px;
